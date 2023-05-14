@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!-- 배경색 어둡게하고 싶으면 data-bs-theme="dark"-->
-<html lang="ko">
+<html lang="ko" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,8 +14,13 @@
     <div class="container-xl">
         <!--제목 container-->
         <div class="title-container">
-            <img id="titlelogo" src="img/titleLogo.png">
-            <p>안녕 우리는 강대 곰두리 3마리의 짱짱 캡스톤 백신 탐지 사이트야~~</p>
+            <div class="img-container">
+                <img id="titlelogo" src="img/titleLogo.png">
+            </div>
+            <div class="p-container">
+                <p style="font-size: 1em; font-weight:700;">Catchirus</p><p>는 AI기반 악성코드 탐지 기술을 사용하여 기존의 패턴 기반 방식과는 달리,<br>
+                    악성코드의 패턴을 학습하여 기존에 없던 새로운 악성코드 또한 탐지한다.</p>
+            </div>
         </div>
         <!--File container-->
         <div class="content-container">
@@ -30,6 +34,30 @@
                         Upload File
                     </button>
                 </div>
+            </div>
+            <div class="filecontent-container">
+                <p>악성코드는 개인정보 유출, 랜섬웨어 등의 공격으로 실질적인 피해를 입히며, 기업 및 국가의 보안을 위협하고 있다. <br>
+                악성코드 감염을 예방하는 방식 중 하나인 백신 프로그램은 이러한 악성 소프트웨어들을 검색하고, 감지하며, 제거하는 역할을 한다. <br>
+                백신 프로그램은 정기적으로 업데이트되어 최신의 바이러스와 악성코드를 검출할 수 있도록 유지되며, 이를 통해 시스템에 대한 보안을 강화할 수 있다.</p>
+            </div>
+        </div>
+        <hr />
+        <div class="footer">
+            <div class="tools">
+                <p style="font-weight: 700;">Tools</p>
+                <ul>
+                    <li>사용한 도구1</li>
+                    <li>사용한 도구2</li>
+                    <li>사용한 도구3</li>
+                </ul>
+            </div>
+            <div class="documentation">
+                <p style="font-weight: 700;">Documentation</p>
+                <ul>
+                    <li>참고문헌1</li>
+                    <li>참고문헌2</li>
+                    <li>참고문헌3</li>
+                </ul>
             </div>
         </div>
         <script src="/js/home.js"></script>
