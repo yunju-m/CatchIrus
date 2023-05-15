@@ -55,6 +55,16 @@
     width:100%;
     padding: 3em;
 }
+.fileBtn{
+    padding: 6px 25px;
+    background-color: cornflowerblue;
+    border-radius: 4px;
+    color:white;
+    cursor: pointer;
+}
+#input-file{
+    display: none;
+}
 .filecontent-container > p{
     font-size: 0.8em;
 }
