@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <!-- 배경색 어둡게하고 싶으면 data-bs-theme="dark"-->
+<!-- Shift + Alt + F 코드정렬 단축키-->
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +11,7 @@
     <link rel="stylesheet" href="style.css">
     <title>CatchiRus</title>
 </head>
+
 <body>
     <div class="container">
         <div class="title-container">
@@ -18,7 +21,43 @@
         <div class="content-container">
             <h1>파일 넣을거얍</h1>
             <form>
-                <input type="file" name="upload_file" accept="image/*">
+                <input type="file" id="photoFile" name="upload_file" accept="image/*">
             </form>
         </div>
+        <div class="modal">
+            <div class="modal_body">Modal</div>
+        </div>
+        <script>
+            const body = document.querySelector('body');
+            const modal = document.querySelector('.modal');
+            let file = document.getElementById("photoFile")
+
+            file.onchange = function (e) {
+                modal.classList.toggle('show');
+
+                // if (modal.classList.contains('show')) {
+                //     body.style.overflow = 'hidden';
+                // }
+            }
+            body.addEventListener('dragenter', function (e) {
+                console.log('dragenter');
+                modal.classList.toggle('show');
+
+                // if (modal.classList.contains('show')) {
+                //     body.style.overflow = 'hidden';
+                // }
+            });
+
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.classList.toggle('show');
+
+                    if (!modal.classList.contains('show')) {
+                        body.style.overflow = 'auto';
+                    }
+                }
+            });
+        </script>
+</body>
+
 </html>
