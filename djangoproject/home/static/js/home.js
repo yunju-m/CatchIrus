@@ -20,7 +20,15 @@ function handleBtnLeave(){
     submitBtn.style.backgroundColor = "cornflowerblue";
 }
 
+function handleBtnClick(event){
+    // 새로고침 방지
+    event.preventDefault();
+    console.log(window.location.href);
+    window.location.href = '/file';
+}
+
 fileBtn.addEventListener("mouseenter", handleBtnEnter);
 fileBtn.addEventListener("mouseleave", handleBtnLeave);
 submitBtn.addEventListener("mouseenter", handleBtnEnter);
 submitBtn.addEventListener("mouseleave", handleBtnLeave);
+submitBtn.addEventListener("click", handleBtnClick);
