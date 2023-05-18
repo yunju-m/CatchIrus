@@ -55,7 +55,7 @@
     width:100%;
     padding: 3em;
 }
-.fileBtn{
+#fileBtn{
     padding: 6px 25px;
     background-color: cornflowerblue;
     border-radius: 4px;
