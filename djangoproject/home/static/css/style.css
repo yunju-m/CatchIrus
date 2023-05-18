@@ -47,6 +47,9 @@
     align-items: center;
     width:100%;
 }
+.input-output-container{
+    display: flex;
+}
 .filecontent-container{
     display: flex;
     flex-direction: column;
@@ -55,7 +58,7 @@
     width:100%;
     padding: 3em;
 }
-#fileBtn{
+.fileBtn{
     padding: 6px 25px;
     background-color: cornflowerblue;
     border-radius: 4px;
@@ -64,6 +67,9 @@
 }
 #input-file{
     display: none;
+}
+#output-file{
+    color: white;
 }
 .filecontent-container > p{
     font-size: 0.8em;
