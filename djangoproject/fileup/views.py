@@ -14,7 +14,7 @@ def fileUpload(request):
             imgfile=img,
         )
         fileupload.save()
-        return redirect('/file')
+        return redirect('file')
     else:
         fileuploadForm = FileUploadForm
         context = {

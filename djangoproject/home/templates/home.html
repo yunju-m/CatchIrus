@@ -41,7 +41,8 @@
             class="bi bi-file-earmark-arrow-up"
             style="font-size: 7rem; color: cornflowerblue"
           ></i>
-          <form method="post" enctype="multipart/form-data">
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             <label
               for="input-file"
               class="fileBtn"

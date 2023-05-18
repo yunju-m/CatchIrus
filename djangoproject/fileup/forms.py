@@ -6,4 +6,4 @@ class FileUploadForm(ModelForm):
     class Meta:
         model = FileUpload 
         #fields = ['title', 'imgfile', 'content']
-        fields=['imgfile']
+        fields = ['title', 'imgfile']
