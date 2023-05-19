@@ -42,9 +42,8 @@
             style="font-size: 7rem; color: cornflowerblue"
           ></i>
           <form method="POST" enctype="multipart/form-data">
-            <div class="input-output-container">
+            <div class="output-container">
               <div id="output-file"></div>
-              <input type="file" id="input-file" multiple />
             </div>
             {% csrf_token %}
             <label
@@ -57,6 +56,7 @@
             >
               Upload File
             </label>
+            <input type="file" id="input-file" name="input-file" multiple />
             <input
               class="fileBtn"
               type="hidden"

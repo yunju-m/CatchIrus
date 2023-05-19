@@ -24,8 +24,7 @@
     justify-content: center;
 }
 #titlelogo{
-    width: 50%;
-    justify-content:center;
+    width: 35em;
     padding:2em;
     padding-top: 0%;
 }
@@ -50,7 +49,7 @@
     align-items: center;
     width:100%;
 }
-.input-output-container{
+.output-container{
     display: flex;
 }
 .filecontent-container{
