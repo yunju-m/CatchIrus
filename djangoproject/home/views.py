@@ -21,3 +21,6 @@ def home(request):
             'filesaveForm': filesaveForm,
         }
         return render(request, 'home.html', context)
+    
+def fileupload(request):
+    return render(request, 'fileResult.html')
