@@ -7,6 +7,11 @@
     <title>Document</title>
   </head>
   <body>
-    나는 file 결과창이야!
+    <p>나는 file 결과창이야!</p>
+    {% for i in model %}
+    <div>
+      <img src="{{ i.imgfile.url }}" height="100" width="100" />
+    </div>
+    {% endfor %}
   </body>
 </html>

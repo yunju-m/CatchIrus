@@ -1,8 +1,8 @@
+from . import models
 from django.shortcuts import redirect, render
 from .models import FileSave
 from .forms import FileSaveForm
 
-# Create your views here.
 def home(request):
     if request.method == 'POST':
         #title = request.POST['title']
@@ -23,4 +23,5 @@ def home(request):
         return render(request, 'home.html', context)
     
 def fileupload(request):
-    return render(request, 'fileResult.html')
+    model = models.FileSave.objects.all()
+    return render(request, 'fileResult.html', {'model': model})
