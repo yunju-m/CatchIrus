@@ -21,7 +21,7 @@
     <div class="container-xl">
       <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
+          <a class="navbar-brand" href="/">Catchirus</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -36,7 +36,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -60,9 +60,6 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
-              </li>
             </ul>
             <form class="d-flex" role="search">
               <input
@@ -71,7 +68,7 @@
                 placeholder="Search"
                 aria-label="Search"
               />
-              <button class="btn btn-outline-success" type="submit">
+              <button class="btn btn-outline-primary" type="submit">
                 Search
               </button>
             </form>
@@ -105,6 +102,7 @@
             <div class="img-content-container">
               {%for i in model.all %}
               <p>파일이름: {{ i.filename }}</p>
+              <p>파일크기: {{ i.filesize }}</p>
               {% endfor %}
             </div>
           </div>
@@ -152,21 +150,6 @@
               aria-selected="false"
             >
               Contact
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link"
-              id="disabled-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#disabled-tab-pane"
-              type="button"
-              role="tab"
-              aria-controls="disabled-tab-pane"
-              aria-selected="false"
-              disabled
-            >
-              Disabled
             </button>
           </li>
         </ul>

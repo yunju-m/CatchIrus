@@ -7,9 +7,11 @@ def home(request):
     if request.method == 'POST':
         imgfile = request.FILES["input-file"]
         filename = request.FILES["input-file"].name
+        filesize = request.FILES["input-file"].size
         filesave = FileSave(
             filename = filename,
             imgfile = imgfile,
+            filesize = filesize,
         )
         filesave.save()
         return redirect('file')

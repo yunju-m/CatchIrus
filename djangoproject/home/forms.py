@@ -4,4 +4,4 @@ from .models import FileSave
 class FileSaveForm(ModelForm):
     class Meta:
         model = FileSave
-        fields = ['filename', 'imgfile']
+        fields = ['filename', 'imgfile', 'filesize']

@@ -31,4 +31,3 @@ fileBtn.addEventListener("mouseenter", handleBtnEnter);
 fileBtn.addEventListener("mouseleave", handleBtnLeave);
 submitBtn.addEventListener("mouseenter", handleBtnEnter);
 submitBtn.addEventListener("mouseleave", handleBtnLeave);
-//submitBtn.addEventListener("click", handleBtnClick);
