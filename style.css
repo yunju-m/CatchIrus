@@ -36,6 +36,8 @@ body{
 .content-container > p {
     font-size: 10px;
 }
+
+/*모달창 시작*/
 .modal {
     position: absolute;
         top: 0;
@@ -71,3 +73,4 @@ body{
   
     transform: translateX(-50%) translateY(-50%);
   }
+  /*모달창 끝*/

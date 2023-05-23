@@ -14,43 +14,46 @@
 
 <body>
     <div class="container">
+        <!--중앙에 있는 로고-->
         <div class="title-container">
             <img id="titlelogo" src="img/titleLogo.png">
             <p>안녕 우리는 강대 곰두리 3마리의 짱짱 캡스톤 백신 탐지 사이트야~~</p>
         </div>
+        <!--파일 넣는 부분-->
         <div class="content-container">
             <h1>파일 넣을거얍</h1>
             <form>
                 <input type="file" id="photoFile" name="upload_file" accept="image/*">
             </form>
         </div>
+        <!--모달창 띄우기-->
         <div class="modal">
             <div class="modal_body">Modal</div>
         </div>
+
+        <!--스크립트-->
         <script>
             const body = document.querySelector('body');
             const modal = document.querySelector('.modal');
             let file = document.getElementById("photoFile")
 
+            //파일 넣는 부분에 이벤트가 발생했을 때 
             file.onchange = function (e) {
-                modal.classList.toggle('show');
-
-                // if (modal.classList.contains('show')) {
-                //     body.style.overflow = 'hidden';
-                // }
+                modal.classList.toggle('show');//모달창을 띄운다.
             }
-            body.addEventListener('dragenter', function (e) {
-                console.log('dragenter');
-                modal.classList.toggle('show');
 
-                // if (modal.classList.contains('show')) {
-                //     body.style.overflow = 'hidden';
-                // }
+            //body에 드래그 이벤트가 발생했을 때
+            body.addEventListener('dragover', function (e) {
+                e.preventDefault();
+                console.log('dragover');
+                modal.classList.add('show');//모달창을 띄운다. add가 아닌 toggle로 하면 모달창이 껏다 켜졌다 반복함.
             });
+            
 
+            //modal에 클릭 이벤트가 발생했을 때
             modal.addEventListener('click', (event) => {
-                if (event.target === modal) {
-                    modal.classList.toggle('show');
+                if (event.target === modal) {//클릭이 모달창 위면
+                    modal.classList.toggle('show');//모달창을 띄우고
 
                     if (!modal.classList.contains('show')) {
                         body.style.overflow = 'auto';
