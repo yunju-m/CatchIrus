@@ -12,6 +12,15 @@
     height:100vh;
     padding:3%;
 }
+.login-container{
+    display: flex;
+    width:100%;
+    justify-content: end;
+}
+.login-container > a {
+    padding-left:1.5em;
+    color: white;
+}
 .title-container{
     display: flex;
     flex-direction: column;

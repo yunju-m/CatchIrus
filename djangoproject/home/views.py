@@ -27,3 +27,9 @@ def home(request):
 def fileupload(request):
     model = models.FileSave.objects.all()
     return render(request, 'fileResult.html', {'model': model})
+
+def login(result):
+    return 'login.html'
+
+def signUp(result):
+    return 'signUp.html'
