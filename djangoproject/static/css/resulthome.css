@@ -1,7 +1,6 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 * {
     font-family: 'Pretendard';
-    src: url('./images/Pretendard-Thin.woff') format('woff');
     font-weight: 400;
     font-display: swap;
 }
