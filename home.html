@@ -42,11 +42,18 @@
                 modal.classList.toggle('show');//모달창을 띄운다.
             }
 
-            //body에 드래그 이벤트가 발생했을 때
+            //body에 드래그하고 있을 때
             body.addEventListener('dragover', function (e) {
                 e.preventDefault();
                 console.log('dragover');
                 modal.classList.add('show');//모달창을 띄운다. add가 아닌 toggle로 하면 모달창이 껏다 켜졌다 반복함.
+            });
+
+            //body에 드래그 드랍했을 때
+            body.addEventListener('drop', function (e) {
+                e.preventDefault();
+                console.log('drop');
+                this.style.backgroundColor = 'pink'; // 여기는 모달창안에 파일 넣는 버튼 만들고 수정할게유
             });
             
 
