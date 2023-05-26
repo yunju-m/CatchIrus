@@ -2,6 +2,7 @@ from . import models
 from django.shortcuts import redirect, render
 from .models import FileSave
 from .forms import FileSaveForm
+from common.forms import UserForm
 
 def home(request):
     # 제출버튼을 클릭하면 해당 file정보를 저장하고 /file로 매핑
@@ -20,8 +21,10 @@ def home(request):
     else:
         # model의 기존 값들을 모두 제거하여 새롭게 입력한 값들만 출력
         models.FileSave.objects.all().delete() 
+        userForm = UserForm
         filesaveForm = FileSaveForm
         context = {
+            'userForm': userForm,
             'filesaveForm': filesaveForm,
         }
         return render(request, 'home.html', context)
