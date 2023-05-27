@@ -22,5 +22,6 @@ class FileSave(models.Model):
 class UserFile(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     filename = models.CharField(max_length=255, null=False)
+    date = models.DateTimeField()
     class Meta:
         db_table = 'user_file'
