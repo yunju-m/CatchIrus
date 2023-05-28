@@ -18,18 +18,27 @@ def home(request):
             imgfile = imgfile,
             filesize = filesize,
         )
-        userfile = UserFile(
-            author = author,
-            filename = filename,
-            date = date,
-        )
-        filesave.save()
+        # 로그인 o => 닉네임 / 로그인 x => visitor(방문객)
+        if author.get_username() == '':
+            UserFile.author = 'visitor'
+            userfile = UserFile(
+                filename = filename,
+                date = date,
+            )
+        else:
+            userfile = UserFile(
+                author = author,
+                filename = filename,
+                date = date,
+            )
         userfile.save()
+        filesave.save()
         return redirect('file')
     # 홈페이지를 불러오면 form생성하고 home.html 화면 출력
     else:
-        # model의 기존 값들을 모두 제거하여 새롭게 입력한 값들만 출력
-        models.FileSave.objects.all().delete() 
+        # 방문객과 기존 파일들을 모두 제거하여 새롭게 입력한 값들만 출력
+        models.FileSave.objects.all().delete()
+        models.UserFile.objects.filter(author=None).delete()
         filesaveForm = FileSaveForm
         usersaveForm = UserFileForm
         context = {
@@ -40,9 +49,13 @@ def home(request):
 
 # /file 매핑되면 file 정보를 fileResult.html에 출력    
 def fileupload(request):
+    print(UserFile.author)
     page = request.GET.get('page', '1') # 페이지(1페이지부터 생성)
     filemodel = models.FileSave.objects.all()
-    usermodel = models.UserFile.objects.filter(author=request.user)
+    if request.user.get_username() == '':
+        usermodel = models.UserFile.objects.filter(author=None)
+    else:
+        usermodel = models.UserFile.objects.filter(author=request.user)
     paginator = Paginator(usermodel, 10)    # 페이지당 10개씩
     userpage_obj = paginator.get_page(page)
     return render(request, 'fileResult.html', {'filemodel': filemodel, 'usermodel': userpage_obj})

@@ -27,6 +27,10 @@ function handleBtnClick(event){
     window.location.href = '/file';
 }
 
+function clickPageBtn(event){
+    event.preventDefault();
+}
+
 fileBtn.addEventListener("mouseenter", handleBtnEnter);
 fileBtn.addEventListener("mouseleave", handleBtnLeave);
 submitBtn.addEventListener("mouseenter", handleBtnEnter);
