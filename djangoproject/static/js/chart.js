@@ -1,8 +1,7 @@
 
-const ctx = document.getElementById("myChart");
+const ctx = document.getElementById("myChart").getContext('2d');
 const data = {
   datasets: [{
-    label: 'Safety',
     data: [80, 20],
     backgroundColor: [
       '#9DCEFF',
@@ -14,56 +13,30 @@ const data = {
   }]
 }
 const options = {
-  cutout: '50%',
+  cutout: '80%',
 }
+
+const centerText = {
+  id: 'centerText',
+  afterDatasetsDraw(chart, args, pluginOptions){
+    const { ctx, data } = chart;
+    const text = '80%';
+
+    ctx.save();
+    const x = chart.getDatasetMeta(0).data[0].x;
+    const y = chart.getDatasetMeta(0).data[0].y;
+  
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.font = 'bold 25px sans-serif';
+    ctx.fillText(text, x, y)
+  }
+}
+
 const myChart = new Chart(ctx, {
     type: 'doughnut',
     data,
     options,
+    plugins: [centerText]
 });
-
-// var myDoughnutChart = new Chart(ctx, {
-//   type: 'doughnut',
-//   data: data,
-//   options: {
-//     plugins: {
-//       doughnutlabel: {
-//         labels: [
-//           {
-//             text: 'The title',
-//             font: {
-//               size: '60'
-//             }
-//           },
-//           {
-//             text: getTotal,
-//             font: {
-//               size: '50'
-//             },
-//             color: 'grey'
-//           },
-//           {
-//             text: '$100.000',
-//             font: {
-//               size: '30'
-//             },
-//             color: 'red'
-//           },
-//           {
-//             text: '95%',
-//             font: {
-//               size: '45'
-//             },
-//           color: 'green'
-//           }
-//         ]
-//       }
-//     }		
-//   }
-// });
-
-// var getTotal = function(myDoughnutChart) {
-//     var sum = myDoughnutChart.config.data.datasets[0].data.reduce((a, b) => a + b, 0);
-//     return `Total: ${sum}`;
-// }
 

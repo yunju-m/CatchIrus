@@ -25,9 +25,6 @@
     position: relative;
     width: 160px;
     height: 160px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
 }
 .title-container{
     display: flex;
@@ -39,14 +36,18 @@
     flex-direction: column;
     border-style: solid;
     border-color: aliceblue;
-    border-width: 2px;
-    margin-top: 2%;
 }
 .model-content-container{
     display:flex;
     width:100%;
     flex-direction: column;
+    justify-content: center;
     background-color: aliceblue;
+}
+
+.model-content-container > p{
+    font-size: large;
+    font-weight: bold;
 }
 
 .tab-content{
