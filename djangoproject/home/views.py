@@ -49,7 +49,6 @@ def home(request):
 
 # /file 매핑되면 file 정보를 fileResult.html에 출력    
 def fileupload(request):
-    print(UserFile.author)
     page = request.GET.get('page', '1') # 페이지(1페이지부터 생성)
     filemodel = models.FileSave.objects.all()
     if request.user.get_username() == '':
@@ -58,4 +57,6 @@ def fileupload(request):
         usermodel = models.UserFile.objects.filter(author=request.user)
     paginator = Paginator(usermodel, 10)    # 페이지당 10개씩
     userpage_obj = paginator.get_page(page)
+    print(userpage_obj.number)
+    print("나는 fileupload함수~~")
     return render(request, 'fileResult.html', {'filemodel': filemodel, 'usermodel': userpage_obj})
