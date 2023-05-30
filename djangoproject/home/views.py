@@ -1,3 +1,5 @@
+from django.http import JsonResponse
+from django.core import serializers
 from . import models
 from django.shortcuts import redirect, render
 from .models import FileSave, UserFile
@@ -57,6 +59,12 @@ def fileupload(request):
         usermodel = models.UserFile.objects.filter(author=request.user)
     paginator = Paginator(usermodel, 10)    # 페이지당 10개씩
     userpage_obj = paginator.get_page(page)
-    print(userpage_obj.number)
-    print("나는 fileupload함수~~")
-    return render(request, 'fileResult.html', {'filemodel': filemodel, 'usermodel': userpage_obj})
+    if request.method == "POST":
+        print("post 시작이요~~")
+        print(serializers.serialize('json',usermodel))
+        usermodeljson = serializers.serialize('json',usermodel)
+        return JsonResponse({'usermodel': usermodeljson})
+    else:
+        print(userpage_obj.number)
+        print("나는 fileupload함수~~")
+        return render(request, 'fileResult.html', {'filemodel': filemodel, 'usermodel': userpage_obj})

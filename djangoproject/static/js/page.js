@@ -6,14 +6,15 @@ $(document).ready(function(){
 });
 function clickPage(event){
     event.preventDefault();
-    console.log(event.target.innerText);
     // history.pushState(null, null, event.target.href);
     console.log("나 실행함!");
-    
+    let data = {"page": event.target.innerText};
     $.ajax({
+        headers: { "X-CSRFToken": '{{csrf_token}}' },
         url: `/file/?page=${event.target.innerText}`,
-        type: "GET",
-        dataType: "text",
+        type: "POST",
+        dataType: "json",
+        data: data,
         success:function(data){
             console.log(data);
             
