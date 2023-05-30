@@ -1,25 +1,25 @@
 // 새로고침없이 페이지 url 수정
 // 해당 내용이 같이 변하지 않는 문제 수정필요
 const pageBtn = document.querySelectorAll(".page-item");
+$(document).ready(function(){
+    $(".page-item").click(clickPage);
+});
 function clickPage(event){
-    console.log(event);
     event.preventDefault();
+    console.log(event.target.innerText);
     // history.pushState(null, null, event.target.href);
-    console.log("나 실햄함!");
+    console.log("나 실행함!");
+    
     $.ajax({
-        url: "{% url 'file' %}",
+        url: `/file/?page=${event.target.innerText}`,
         type: "GET",
-        data: event.target.innerText,
+        dataType: "text",
         success:function(data){
             console.log(data);
+            
         },
         error: function(){
-            alert('응애??? 왜 너가 여기서나와?');
+            alert('Error 발생했습니다.');
         }
     });
 };
-
-pageBtn[0].addEventListener("click", clickPage);
-pageBtn[1].addEventListener("click", clickPage);
-pageBtn[2].addEventListener("click", clickPage);
-pageBtn[3].addEventListener("click", clickPage);
