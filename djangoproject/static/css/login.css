@@ -1,0 +1,49 @@
+.content-container{
+    width:30em;
+}
+.title-container{
+    display: flex;
+    padding-bottom: 8%;
+    width:100%;
+}
+.login-container{
+    display: flex;
+    flex-direction: column;
+}
+.id-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.detail-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 1.5em;
+}
+.pw-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width:100%;
+}
+.pw1-container{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1.5em;
+}
+#pswd1Btn{
+    visibility: hidden;
+}
+.pw2-container{
+    display: flex;
+    flex-direction: column;
+}
+.btn-container{
+    display: flex;
+    width:100%;
+    padding-top:15%;
+    padding-bottom: 3%;
+    align-items: center;
+    justify-content: space-between;
+}
