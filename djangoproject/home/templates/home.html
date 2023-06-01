@@ -52,28 +52,30 @@
             class="bi bi-file-earmark-arrow-up"
             style="font-size: 7rem; color: cornflowerblue"
           ></i>
-          <form method="POST" enctype="multipart/form-data">
+          <form class="fileform" method="POST" enctype="multipart/form-data">
             <div class="output-container">
               <div id="output-file"></div>
             </div>
-            {% csrf_token %}
-            <label
-              for="input-file"
-              class="fileBtn"
-              id="fileBtn"
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              title="Max size 650MB"
-            >
-              Upload File
-            </label>
-            <input type="file" id="input-file" name="input-file" multiple />
-            <input
-              class="fileBtn"
-              type="hidden"
-              id="submitBtn"
-              value="Submit"
-            />
+            <div class="output-btn-container">
+              {% csrf_token %}
+              <label
+                for="input-file"
+                class="fileBtn"
+                id="fileBtn"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Max size 650MB"
+              >
+                Upload File
+              </label>
+              <input type="file" id="input-file" name="input-file" multiple />
+              <input
+                class="fileBtn"
+                type="hidden"
+                id="submitBtn"
+                value="Submit"
+              />
+            </div>
           </form>
         </div>
         <div class="filecontent-container">

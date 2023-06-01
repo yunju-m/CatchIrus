@@ -62,6 +62,10 @@
 .output-container{
     display: flex;
 }
+.output-btn-container{
+    display: flex;
+    justify-content: center;
+}
 .filecontent-container{
     display: flex;
     flex-direction: column;
@@ -77,6 +81,7 @@
     color:white;
     cursor: pointer;
 }
+
 #input-file{
     display: none;
 }

@@ -11,4 +11,4 @@ class FileSaveForm(ModelForm):
 class UserFileForm(ModelForm):
     class Meta:
         model = UserFile
-        fields = ('author', 'filename', 'date')
+        fields = ('author','authorname', 'filename', 'date')
