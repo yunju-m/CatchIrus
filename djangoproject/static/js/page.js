@@ -16,8 +16,14 @@ function clickPage(event){
         dataType: "json",
         data: data,
         success:function(data){
-            console.log(data);
-            
+            userJson = JSON.stringify(data);
+            resultuser = JSON.parse(userJson);
+            usermodel = JSON.parse(resultuser.usermodel);
+            $.each(usermodel, function(key, value){
+                console.log("key: " + key);
+                // console.log("value.model: " + value.model);
+                console.log("value.author" + value.fields.filename);
+            })
         },
         error: function(){
             alert('Error 발생했습니다.');
