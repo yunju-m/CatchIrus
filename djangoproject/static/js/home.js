@@ -51,7 +51,7 @@ body.addEventListener('dragover', function (e) {
 body.addEventListener('drop', function (e) {
     e.preventDefault();
     console.log('drop');
-    this.style.backgroundColor = 'pink'; // 여기는 모달창안에 파일 넣는 버튼 만들고 수정할게유
+    //버튼 글자 'Upload File'에서 'Submit'으로 바꾸기
 });
 
 
