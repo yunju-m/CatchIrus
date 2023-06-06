@@ -19,6 +19,17 @@
   </head>
   <body>
     <div class="container-xl">
+      <div class="login-container">
+        {% if user.is_authenticated %}
+        <a class="nav-link" href="{% url 'common:logout' %}"
+          >{{ user.username }} (로그아웃)</a
+        >
+        {% else %}
+        <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
+        {% endif %} {% if not user.is_authenticated %}
+        <a class="nav-link" href="{% url 'common:signup' %}">회원가입</a>
+        {% endif %}
+      </div>
       <!--제목 container-->
       <div class="title-container">
         <div class="img-container">
@@ -41,12 +52,42 @@
             class="bi bi-file-earmark-arrow-up"
             style="font-size: 7rem; color: cornflowerblue"
           ></i>
-          <form method="POST" enctype="multipart/form-data">
+          <form class="fileform" method="POST" enctype="multipart/form-data">
             <div class="output-container">
               <div id="output-file"></div>
             </div>
-            {% csrf_token %}
-            <label
+            <div class="output-btn-container">
+              {% csrf_token %}
+              <label
+                for="input-file"
+                class="fileBtn"
+                id="fileBtn"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Max size 650MB"
+              >
+                Upload File
+              </label>
+              <input type="file" id="input-file" name="input-file" multiple />
+              <input
+                class="fileBtn"
+                type="hidden"
+                id="submitBtn"
+                value="Submit"
+              />
+            </div>
+          </form>
+          <!--모달창 띄우기-->
+          <div class="modal">
+            <div class="modal_body">
+              <div class="modal-container">
+                <i
+                  class="bi-file-earmark-arrow-up"
+                  style="font-size: 7rem; color: cornflowerblue"
+                ></i>
+              </div>
+              <div class = "modal_file">
+                <label
               for="input-file"
               class="fileBtn"
               id="fileBtn"
@@ -56,18 +97,13 @@
             >
               Upload File
             </label>
-            <input type="file" id="input-file" name="input-file" multiple />
-            <input
-              class="fileBtn"
-              type="hidden"
-              id="submitBtn"
-              value="Submit"
-            />
-          </form>
-          <!--모달창 띄우기-->
-          <div class="modal">
-            <div class="modal_body">Modal</div>
+             </div>
+            <div class = "modal_warning">
+              위의 데이터를 제출함으로써 귀하는 당사의 서비스 약관 및 개인정보 보호정책과 귀하의 샘플 제출을 보안 커뮤니티와 공유하는 데 동의하는 것입니다. 개인 정보를 제출하지 마십시오. CatchiRus는 귀하가 제출한 내용에 대해 책임을 지지 않습니다.
+            </div>         
+            </div>
           </div>
+          <!--모달창 띄우기 끝-->
         </div>
         <div class="filecontent-container">
           <p>
