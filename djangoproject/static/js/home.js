@@ -2,8 +2,8 @@ const fileInput = document.getElementById("input-file");
 const fileOutput = document.getElementById("output-file");
 const fileBtn = document.getElementById("fileBtn");
 const submitBtn = document.getElementById("submitBtn");
-//const body = document.querySelector('body');
-//const modal = document.querySelector('.modal');
+const body = document.querySelector('body');
+const modal = document.querySelector('.modal');
 //let file = document.getElementById("input-file")
 
 // 파일 업로드 시 제출 버튼 생성 함수
