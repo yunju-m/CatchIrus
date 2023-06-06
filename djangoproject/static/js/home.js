@@ -4,7 +4,7 @@ const fileBtn = document.getElementById("fileBtn");
 const submitBtn = document.getElementById("submitBtn");
 const body = document.querySelector('body');
 const modal = document.querySelector('.modal');
-let file = document.getElementById("input-file")
+//let file = document.getElementById("input-file")
 
 function handleFileUp(event) {
     const files = event.target.files;
