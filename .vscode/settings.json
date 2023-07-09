@@ -1,0 +1,20 @@
+{
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8"
+  },
+  "python.formatting.provider": "autopep8",
+  "files.associations": {
+    "**/*.html": "html",
+    "**/templates/**/*.html": "django-html",
+    "**/templates/**/*": "django-txt",
+    "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+  },
+  "emmet.includeLanguages": {
+    "django-html": "html"
+  },
+  "unibeautify.enabled": true,
+  "[django-html]": {
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": "Glavin001.unibeautify-vscode"
+  }
+}

@@ -13,12 +13,12 @@ def home(request):
     if request.method == 'POST':
         author = request.user
         date = timezone.now()
-        imgfile = request.FILES["input-file"]
+        file_upload = request.FILES["input-file"]
         filename = request.FILES["input-file"].name
         filesize = request.FILES["input-file"].size
         filesave = FileSave(
             filename = filename,
-            imgfile = imgfile,
+            file_upload = file_upload,
             filesize = filesize,
         )
         # 로그인 o => 닉네임 / 로그인 x => visitor(방문객)

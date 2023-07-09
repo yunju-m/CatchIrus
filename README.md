@@ -74,6 +74,20 @@ INSTALLED_APPS = [
 ]
 ```
 
+### django super사용자 생성
+```shell
+$ python manage.py createsuperuser
+$ username: yunju
+$ Email address: yunju@django.com
+$ Password:
+$ Password (again): 
+Superuser created successfully
+``` 
+### Beautifulsoup4 설치
+```shell
+$ pip install beautifulsoup4
+```
+
 
 ## Stacks ⭐
 
@@ -100,13 +114,17 @@ INSTALLED_APPS = [
 | 날짜 |                            내용                             |
 | --------- | ----------------------------------------------------------- |
 |2023.05.16 | 메인, 결과 페이지 UI 구현 |
-|2023.05.18 | Djagno 설치 및 프로젝트, 앱(home, file) 생성 |
+|2023.05.18 | Djagno 설치 및 프로젝트, 앱(home, common) 생성 |
 |2023.05.20 | 업로드 파일 정보 모델에 저장 후 결과 페이지 출력 |
 |2023.05.25 | 로그인, 회원가입 UI 구현 / yunju+jiyun branch merge |
-|2023.05.26 | DB Mysql과 연동 |
+|2023.05.26 | DB MariaDB와 연동 |
 |2023.05.29 | 로그인 사용자 정보 및 업로드 파일 리스트 출력 |
 |2023.06.01 | 페이징 기능 구현 |
 |2023.06.06 | yunju+jiyun+seonyoung branch merge |
+|2023.07.09 | djangoproject 전체 구조 수정 및 .gitignore 추가 |
+|2023.07.09 | 가상환경 venv 변경 |
+|2023.07.09 | 회원가입 후 자동 로그인 문제 해결 |
+
 
 ## 화면 구성 📺
 | 로그인 페이지 | 회원가입 페이지 |

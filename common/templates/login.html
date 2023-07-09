@@ -29,40 +29,15 @@
                 {% csrf_token %} {% include "form_errors.html" %}
                 <div class="detail-container">
                   <label for="username">사용자 ID</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="username"
-                    id="username"
-                    value="{{ form.username.value|default_if_none:'' }}"
-                  />
+                  <input type="text" class="form-control" name="username" id="username" value="{{ form.username.value|default_if_none:'' }}"/>
                 </div>
                 <div class="pw-container">
                   <label for="password">비밀번호</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    name="password"
-                    id="password"
-                    value="{{ form.password.value|default_if_none:'' }}"
-                  />
+                  <input type="password" class="form-control" name="password" id="password" value="{{ form.password.value|default_if_none:'' }}"/>
                 </div>
                 <div class="btn-container">
-                  <button
-                    type="button"
-                    id="backBtn"
-                    class="btn btn-dark"
-                    onclick="location.href='/'"
-                  >
-                    뒤로가기
-                  </button>
-                  <button
-                    type="submit"
-                    id="joinResultBtn"
-                    class="btn btn-dark w-50"
-                  >
-                    로그인
-                  </button>
+                  <button type="button" id="backBtn" class="btn btn-dark" onclick="location.href='/'">뒤로가기</button>
+                  <button type="submit" id="joinResultBtn" class="btn btn-dark w-50" >로그인</button>
                 </div>
               </form>
             </div>
