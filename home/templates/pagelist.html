@@ -1,0 +1,39 @@
+<!-- 페이징처리 시작 -->
+<ul class="pagination justify-content-center">
+  <!-- 이전페이지 -->
+  {% if usermodel.has_previous %}
+  <li class="page-item">
+    <a class="page-link" href="?page={{ usermodel.previous_page_number }}"
+      >이전</a
+    >
+  </li>
+  {% else %}
+  <li class="page-item disabled">
+    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+  </li>
+  {% endif %}
+  <!-- 페이지리스트 -->
+  {% for userpage in usermodel.paginator.page_range %}
+  <!--해당 페이지이면-->
+  {% if userpage == usermodel.number %}
+  <li class="page-item active" aria-current="page">
+    <a class="page-link" href="?page={{  userpage }}">{{ userpage }}</a>
+  </li>
+  {% else %}
+  <li class="page-item">
+    <a class="page-link" href="?page={{ userpage}}">{{ userpage }}</a>
+  </li>
+  {% endif %}
+  <!--구분선-->
+  {% endfor %}
+  <!-- 다음페이지 -->
+  {% if usermodel.has_next %}
+  <li class="page-item">
+    <a class="page-link" href="?page={{ usermodel.next_page_number }}">다음</a>
+  </li>
+  {% else %}
+  <li class="page-item disabled">
+    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+  </li>
+  {% endif %}
+</ul>
