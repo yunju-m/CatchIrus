@@ -6,19 +6,12 @@ const body = document.querySelector('body');
 const modal = document.querySelector('.modal');
 let file = document.getElementById("input-file")
 
-// fileInput.addEventListener('input', (event) =>{
-//     const files = event.target.files;
-//     fileOutput.textContent = Array.from(files).map(file=> file.name).join("\n")
-//     fileBtn.setAttribute("hidden", "hidden");
-//     submitBtn.setAttribute("type", "submit");
-// })
 // 파일 입력 요소와 드래그 앤 드랍 이벤트를 처리하는 함수
 function handleFileSelection(event) {
-    const files = event.target.files;
+    const files = event.target.files || event.dataTransfer.files;
     fileOutput.textContent = Array.from(files).map(file => file.name).join("\n");
     fileBtn.setAttribute("hidden", "hidden");
     submitBtn.setAttribute("type", "submit");
-    body.backgroundColor = "#183e84";
 }
 
 // 파일 입력 요소 이벤트 리스너 등록
@@ -46,10 +39,10 @@ fileBtn.addEventListener("mouseleave", handleBtnLeave);
 submitBtn.addEventListener("mouseenter", handleBtnEnter);
 submitBtn.addEventListener("mouseleave", handleBtnLeave);
 
-// //파일 넣는 부분에 이벤트가 발생했을 때 
-// file.onchange = function (e) {
-//     modal.classList.toggle('show');//모달창을 띄운다.
-// }
+//파일 넣는 부분에 이벤트가 발생했을 때 
+file.onchange = function (e) {
+    modal.classList.toggle('show');//모달창을 띄운다.
+}
 
 //body에 드래그하고 있을 때
 body.addEventListener('dragover', function (e) {
@@ -70,7 +63,7 @@ body.addEventListener('drop', function (e) {
 modal.addEventListener('drop', function (e) {
     console.log('modaldrop');
     //버튼 글자 'Upload File'에서 'Submit'으로 바꾸기
-    handleFileSelection(e);
+    // handleFileSelection(e);
 });
 
 
