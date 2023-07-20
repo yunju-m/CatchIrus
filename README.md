@@ -34,20 +34,20 @@ $ cd .
 
 #### 가상환경 설치 및 시작
 
-```
+```shell
 $ python -m venv venv
 $ venv\Scripts\activate.bat
 ```
 
 #### 가상환경 종료
 
-```
+```shell
 $ deactivate
 ```
 
 ### django 개발환경
 
-```
+```shell
 $ pip install django
 $ pip list
 $ django-admin startproject djangoproject
@@ -58,7 +58,6 @@ $ python manage.py startapp file
 $ python manage.py startapp user
 ```
 ### model 변경 시 makemigrations, migrate
-
 1. django에게 변경사항을 알려주는 작업
 
 ```bash
@@ -80,6 +79,19 @@ $ python manage.py migrate home(app이름)
 - mariaDB의 table 삭제 시 makemigraions, migrate을 통해 재생성⭕
 - 조건1: 기존 table 모두 삭제한 후 전체 생성해야함.
 - 조건2: migrations 파일의 내역 존재❌
+
+<span style="color:red">
+※ 초기 migrations 오류 발생할 경우
+</span>
+
+```shell
+$ python manage.py makemigrations home(app이름)
+```
+
+### mariaDB 연동 - mysqlclient 설치
+```shell
+$ pip install mysqlclient
+```
 
 ### 새로운 앱 프로젝트 setting
 
