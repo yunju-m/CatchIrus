@@ -3,7 +3,7 @@ from django.core import serializers
 
 from . import models
 from django.shortcuts import redirect, render
-from .models import FileSave, UserFile
+from .models import FileSave, RankFile, UserFile
 from .forms import FileSaveForm, UserFileForm
 from django.core.paginator import Paginator 
 from django.utils import timezone
@@ -65,7 +65,7 @@ def fileupload(request):
     for file_object in file_objects:
         upload_file = file_object.filename
     matchfilemodel = models.UserFile.objects.filter(filename=upload_file)
-    
+
     page = request.GET.get('page', '1') # 페이지(1페이지부터 생성)
     paginator = Paginator(usermodel, 10)    # 페이지당 10개씩
     userpage_obj = paginator.get_page(page)
@@ -75,4 +75,4 @@ def fileupload(request):
         usermodeljson = serializers.serialize('json',usermodel)
         return JsonResponse({'usermodel': usermodeljson, 'userpage': userpage_obj.number})
     else:
-        return render(request, 'fileResult.html', {'filemodel': filemodel, 'usermodel': userpage_obj, 'matchfilemodel':matchfilemodel})
+        return render(request, 'fileResult.html', {'filemodel': filemodel, 'usermodel': userpage_obj, 'matchfilemodel':matchfilemodel, 'filecount': len(matchfilemodel)})

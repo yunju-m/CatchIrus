@@ -21,9 +21,19 @@ class UserFile(models.Model):
     authorname = models.CharField(max_length=20, null=False)
     filename = models.CharField(max_length=255, null=False)
     date = models.DateTimeField()
+    
     class Meta:
         db_table = 'user_file'
     
-    # 제목 표시
     def __str__(self):
         return self.authorname + "_" + self.filename
+    
+class RankFile(models.Model):
+    filename = models.CharField(max_length=255, null=False)
+    count = models.IntegerField(default=0)
+
+    class Meta:
+        db_table = 'rank_file'
+
+    def __str__(self):
+        return self.filename + "-" + self.count
