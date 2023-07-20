@@ -50,13 +50,36 @@ $ deactivate
 ```
 $ pip install django
 $ pip list
-$ django-admin startproject jangoproject
+$ django-admin startproject djangoproject
 $ python manage.py runserver
 $ python manage.py migrate
 $ python manage.py startapp home
 $ python manage.py startapp file
 $ python manage.py startapp user
 ```
+### model 변경 시 makemigrations, migrate
+
+1. django에게 변경사항을 알려주는 작업
+
+```bash
+$ python manage.py makemigrations
+```
+
+2. 변경사항을 데이터베이스에 적용
+
+```bash
+$ python manage.py migrate
+```
+
+ ### maraidb 테이블 생성 후 저장
+ - 기존 db 오류 발생 시 : **초기화 작업** 필요
+```shell
+$ python manage.py migrate --fake home(app이름) zero
+$ python manage.py migrate home(app이름)
+```
+- mariaDB의 table 삭제 시 makemigraions, migrate을 통해 재생성⭕
+- 조건1: 기존 table 모두 삭제한 후 전체 생성해야함.
+- 조건2: migrations 파일의 내역 존재❌
 
 ### 새로운 앱 프로젝트 setting
 
@@ -83,6 +106,7 @@ $ Password:
 $ Password (again): 
 Superuser created successfully
 ``` 
+
 ### Beautifulsoup4 설치
 ```shell
 $ pip install beautifulsoup4
@@ -124,7 +148,9 @@ $ pip install beautifulsoup4
 |2023.07.09 | djangoproject 전체 구조 수정 및 .gitignore 추가 |
 |2023.07.09 | 가상환경 venv 변경 |
 |2023.07.09 | 회원가입 후 자동 로그인 문제 해결 |
-
+|2023.07.09 | 업로드 파일 저장 경로 변경 |
+|2023.07.15 | CatchIrus API 명세서 작성 - notion |
+|2023.07.20 | 파일별 업로드 회원 정보 출력 |
 
 ## 화면 구성 📺
 | 로그인 페이지 | 회원가입 페이지 |
@@ -132,3 +158,7 @@ $ pip install beautifulsoup4
 
 | 메인 페이지 | 검사결과 페이지 |
 | ------------ | ---------------- |
+
+## Data API Document 
+<div align="center">
+<img alt="dataApi" src="/static/img/DataApi.png">
