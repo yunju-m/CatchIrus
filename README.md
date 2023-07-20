@@ -160,5 +160,4 @@ $ pip install beautifulsoup4
 | ------------ | ---------------- |
 
 ## Data API Document 
-<div align="center">
-<img alt="dataApi" src="/static/img/DataApi.png">
+![DataApi](https://github.com/yunju-m/CatchIrus/assets/74498379/88943739-9a93-4b17-a3e4-787817d91048)
