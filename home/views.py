@@ -54,18 +54,25 @@ def home(request):
 
 # /file 매핑되면 file 정보를 fileResult.html에 출력    
 def fileupload(request):
-    page = request.GET.get('page', '1') # 페이지(1페이지부터 생성)
-    filemodel = models.FileSave.objects.all()
+    # user별로 정보 추출
     if request.user.get_username() == '':
         usermodel = models.UserFile.objects.filter(author=None)
     else:
         usermodel = models.UserFile.objects.filter(author=request.user)
+    
+    # file별로 정보 추출
+    file_objects = models.FileSave.objects.all()
+    for file_object in file_objects:
+        upload_file = file_object.filename
+    matchfilemodel = models.UserFile.objects.filter(filename=upload_file)
+    
+    page = request.GET.get('page', '1') # 페이지(1페이지부터 생성)
     paginator = Paginator(usermodel, 10)    # 페이지당 10개씩
     userpage_obj = paginator.get_page(page)
+    filemodel = models.FileSave.objects.all()   # 업로드된 파일 정보
     if request.method == "POST":
-        print("post 시작이요~~")
         # usermodel --> Json 변환
         usermodeljson = serializers.serialize('json',usermodel)
         return JsonResponse({'usermodel': usermodeljson, 'userpage': userpage_obj.number})
     else:
-        return render(request, 'fileResult.html', {'filemodel': filemodel, 'usermodel': userpage_obj})
+        return render(request, 'fileResult.html', {'filemodel': filemodel, 'usermodel': userpage_obj, 'matchfilemodel':matchfilemodel})

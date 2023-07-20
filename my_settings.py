@@ -1,4 +1,4 @@
-# mySQL DB 연동
+# maria DB 연동
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

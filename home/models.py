@@ -8,9 +8,6 @@ class FileSave(models.Model):
     filesize = models.IntegerField(default=0)
 
     # home_filesave 이름으로 maraidb 테이블 생성 후 저장
-    # 기존 db 오류 발생 시 : 초기화 작업 필요
-    # python manage.py migrate --fake home(app이름) zero
-    # python manage.py migrate home(app이름)
     class Meta:
         db_table = 'home_filesave'
 
@@ -26,3 +23,7 @@ class UserFile(models.Model):
     date = models.DateTimeField()
     class Meta:
         db_table = 'user_file'
+    
+    # 제목 표시
+    def __str__(self):
+        return self.authorname + "_" + self.filename
