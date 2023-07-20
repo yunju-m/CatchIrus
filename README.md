@@ -57,6 +57,12 @@ $ python manage.py startapp home
 $ python manage.py startapp file
 $ python manage.py startapp user
 ```
+
+### mysqlclient 설치 - maria db연동
+```shell
+$ pip install mysqlclient
+```
+
 ### model 변경 시 makemigrations, migrate
 1. django에게 변경사항을 알려주는 작업
 
