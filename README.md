@@ -161,4 +161,4 @@ $ pip install beautifulsoup4
 
 ## Data API Document 
 <div align="center">
-<img width="330" alt="dataApi" src="/static/img/DataApi.png">
+<img alt="dataApi" src="/static/img/DataApi.png">
