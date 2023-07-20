@@ -1,3 +1,4 @@
+/*
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 * {
     font-family: 'Pretendard';
@@ -121,7 +122,6 @@ ul > li{
 
     background-color: rgba(0, 0, 0, 0.4);
     box-shadow: 5px 5px 5px 5px gray;
-    
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -182,3 +182,4 @@ ul > li{
     padding-top: 20px;
   }
   /*모달창 끝*/
+  */
