@@ -1,35 +1,28 @@
-from django.db import models
-from django.contrib.auth.models import User
-import os, csv, pickle
+import csv
 
 dic = {}
 four_gram = {}
 num = 0
 
-# 데이터 전처리하는 모델
-class RunShell(models.Model):
-    opcode_txt = os.system("C:\Users\syros\Documents\GitHub\CatchIrus\djangoproject\extract_opcode.sh")
+class Data:  
+    def __init__(self, filepath):
+        self.filepath = filepath
     
-    # 쉘코드로 뽑아낸 txt 파일을 csv 파일로 변환
-    f_in = open("./media/test.txt", "r")
-    f_out = open("./media/test.csv", "w")
-        
-    for line in f_in:
-        line_replace=line.replace("\n",",")
-        f_out.write(line_replace)
-        
-    f_in.close()
-    f_out.close()
-
-    # opcode를 dictionary로 만들기
-    def make_dic():
+    '''
+    opcode를 dictionary로 만들기
+    ex) add, mov, mov, int -> {add, mov, mov, int ...}
+    '''
+    def make_dic(self):
         total_data = {}
-        with open("./media/test.csv", "r") as inp:
+        with open(self.filepath, "r") as inp:
             reader = csv.reader(inp)
-            total_data = {rows[0]:rows[1:501] for rows in reader}
+            total_data = {rows[0]:rows[1:504] for rows in reader}
         return total_data
-
-    # dictionary에 있는 opcode들 숫자로 변환
+    
+    '''
+    dictionary에 있는 opcode들 숫자로 변환
+    ex) {add, mov, mov, int} -> {1, 2, 2, 3}, {2, 2, 3, x}, {...}
+    '''
     def change_num(total_data):
         global num
         ngram = {}
@@ -50,8 +43,11 @@ class RunShell(models.Model):
                 temp1.append(temp2)
             ngram[fname[k]] = temp1
         return ngram
-
-    # 숫자로 변환한 opcode를 4-gram 전처리
+    
+    '''
+    숫자로 변환한 opcode를 4-gram 전처리
+    ex) {1, 2, 2, 3 ...} -> 1, 2, 3, ...
+    '''
     def make_4gram(ngram):
         global num
         num = 0
@@ -76,8 +72,8 @@ class RunShell(models.Model):
         return result
 
     # csv로 저장
-    def make_csv(fgram):
-        with open('test.csv', 'w') as f:
+    def make_csv(fgram, filepath):
+        with open(filepath, 'w') as f:
             write = csv.writer(f)
             print("file name", sep=',', file=f, end=',')
             for i in range(500):
@@ -88,8 +84,3 @@ class RunShell(models.Model):
                 for d in v:
                     print(d, sep=',', file=f, end=',')
                 print(' ', file=f)
-
-    l = make_dic()
-    ngram = change_num(l)
-    fgram = make_4gram(ngram)
-    make_csv(fgram)
