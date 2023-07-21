@@ -8,6 +8,23 @@ from .forms import FileSaveForm, UserFileForm
 from django.core.paginator import Paginator 
 from django.utils import timezone
 
+# 선영이가 추가한 라이브러리
+import joblib
+from .user_util.txt_to_csv import Change
+from .user_util.data_preprocessing import Data
+import os #os.getcwd() -> 현재 디렉토리 확인
+
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import operator
+from sklearn import svm
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
+from sklearn.metrics import f1_score, accuracy_score, classification_report, confusion_matrix, precision_score, recall_score
+import xgboost
+
 def home(request):
     # 제출버튼을 클릭하면 해당 file정보를 저장하고 /file로 매핑
     if request.method == 'POST':
@@ -38,6 +55,31 @@ def home(request):
             )
         userfile.save()
         filesave.save()
+
+        ''' 선영이 코드 추가 '''
+        # opcode 추출 txt파일을 csv파일로 변환
+        name = os.path.splitext(filename)[0]
+        
+        os.system(f"echo {name} > ./user_util/temp/{name}.txt")  # 파일 이름
+        os.system(f"objdump -d \"./media/{name}.exe\" | grep \"^ \" | cut -f 3 | cut -f 1 -d \" \" >> ./user_util/temp/{name}.txt")  # opcode
+
+        t_to_c = Change("./user_util/temp/", f"{name}")
+        t_to_c.txt_to_csv()
+
+        # 4-gram 전처리하여 파일 저장
+        result = Data(F"./user_util/temp/{name}.csv")
+        l = result.make_dic()
+        ngram = Data.change_num(l)
+        fgram = Data.change_4gram(ngram)
+        Data.make_csv(fgram, f"./user_util/result/{name}.csv")\
+        
+        # media에 있는 파일 삭제
+        for file in os.scandir("./media"):
+            os.remove(file)
+        # 결과 파일 빼고 모두 삭제
+        for file in os.scandir("./user_util/temp"):
+            os.remove(file)
+
         return redirect('file')
     # 홈페이지를 불러오면 form생성하고 home.html 화면 출력
     else:
