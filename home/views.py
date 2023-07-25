@@ -24,6 +24,7 @@ from sklearn.model_selection import train_test_split
 from sklearn import metrics
 from sklearn.metrics import f1_score, accuracy_score, classification_report, confusion_matrix, precision_score, recall_score
 import xgboost
+from datetime import datetime
 
 def home(request):
     # 제출버튼을 클릭하면 해당 file정보를 저장하고 /file로 매핑
@@ -56,12 +57,15 @@ def home(request):
         userfile.save()
         filesave.save()
 
-        ''' 선영이 코드 추가 '''
+        ''' 선영이 코드 추가 시작 '''
         # opcode 추출 txt파일을 csv파일로 변환
         name = os.path.splitext(filename)[0]
+        year = datetime.today().year
+        month = datetime.today().month
+        day = datetime.today().day
         
         os.system(f"echo {name} > ./user_util/temp/{name}.txt")  # 파일 이름
-        os.system(f"objdump -d \"./media/{name}.exe\" | grep \"^ \" | cut -f 3 | cut -f 1 -d \" \" >> ./user_util/temp/{name}.txt")  # opcode
+        os.system(f"objdump -d \"./media/{name}.exe\" | grep \"^ \" | cut -f 3 | cut -f 1 -d \" \" >> ./user_util/temp/{year}/{month}/{day}/{name}.txt")  # opcode
 
         t_to_c = Change("./user_util/temp/", f"{name}")
         t_to_c.txt_to_csv()
@@ -79,6 +83,7 @@ def home(request):
         # 결과 파일 빼고 모두 삭제
         for file in os.scandir("./user_util/temp"):
             os.remove(file)
+        ''' 선영이 코드 끝 '''
 
         return redirect('file')
     # 홈페이지를 불러오면 form생성하고 home.html 화면 출력
