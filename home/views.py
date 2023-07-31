@@ -64,24 +64,27 @@ def home(request):
         month = datetime.today().month
         day = datetime.today().day
         
-        os.system(f"echo {name} > ./user_util/temp/{name}.txt")  # 파일 이름
-        os.system(f"objdump -d \"./media/{name}.exe\" | grep \"^ \" | cut -f 3 | cut -f 1 -d \" \" >> ./user_util/temp/{year}/{month}/{day}/{name}.txt")  # opcode
-
-        t_to_c = Change("./user_util/temp/", f"{name}")
+        os.system(f"echo {name} > ./home/user_util/temp/{name}.txt")  # 파일 이름
+        if(month < 10):
+            os.system(f"objdump -d \"./media/home/files/{year}/0{month}/{day}/{name}.exe\" | grep \"^ \" | cut -f 3 | cut -f 1 -d \" \" >> ./home/user_util/temp/{name}.txt")  # opcode
+        else:
+            os.system(f"objdump -d \"./media/home/files/{year}/{month}/{day}/{name}.exe\" | grep \"^ \" | cut -f 3 | cut -f 1 -d \" \" >> ./home/user_util/temp/{name}.txt")  # opcode
+        
+        t_to_c = Change("./home/user_util/temp/", f"{name}")
         t_to_c.txt_to_csv()
 
         # 4-gram 전처리하여 파일 저장
-        result = Data(F"./user_util/temp/{name}.csv")
+        result = Data(F"./home/user_util/temp/{name}.csv")
         l = result.make_dic()
         ngram = Data.change_num(l)
-        fgram = Data.change_4gram(ngram)
-        Data.make_csv(fgram, f"./user_util/result/{name}.csv")\
+        fgram = Data.make_4gram(ngram)
+        Data.make_csv(fgram, f"./home/user_util/result/{name}.csv")\
         
-        # media에 있는 파일 삭제
-        for file in os.scandir("./media"):
-            os.remove(file)
+        # # media에 있는 파일 삭제
+        # for file in os.scandir("./media"):
+        #     os.remove(file)
         # 결과 파일 빼고 모두 삭제
-        for file in os.scandir("./user_util/temp"):
+        for file in os.scandir("./home/user_util/temp"):
             os.remove(file)
         ''' 선영이 코드 끝 '''
 
