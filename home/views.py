@@ -20,9 +20,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import operator
 from sklearn import svm
-from sklearn.model_selection import train_test_split
 from sklearn import metrics
-from sklearn.metrics import f1_score, accuracy_score, classification_report, confusion_matrix, precision_score, recall_score
 import xgboost
 from datetime import datetime
 
@@ -86,6 +84,17 @@ def home(request):
         # 결과 파일 빼고 모두 삭제
         for file in os.scandir("./home/user_util/temp"):
             os.remove(file)
+
+        # 탐지된 결과 출력
+        xgb_model = joblib.load('saved_xgb_model.pkl')
+
+        data = pd.read_csv('GitHubDesktop.csv')
+        data = data.dropna(axis=1)
+        data = data.drop('997', axis=1)
+        data = data.drop('file name', axis=1)
+
+        y_pred = xgb_model.predict(data).flatten()
+        y_pred = np.where(y_pred < 0.5, 1, 0)
         ''' 선영이 코드 끝 '''
 
         return redirect('file')

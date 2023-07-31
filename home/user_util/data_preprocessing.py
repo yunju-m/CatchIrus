@@ -16,7 +16,7 @@ class Data:
         total_data = {}
         with open(self.filepath, "r") as inp:
             reader = csv.reader(inp)
-            total_data = {rows[0]:rows[1:504] for rows in reader}
+            total_data = {rows[0]:rows[1:1001] for rows in reader}
         return total_data
     
     '''
@@ -76,7 +76,7 @@ class Data:
         with open(filepath, 'w') as f:
             write = csv.writer(f)
             print("file name", sep=',', file=f, end=',')
-            for i in range(500):
+            for i in range(1000):
                 print(i, sep=',', file=f, end=',')
             print(' ', file=f)
             for k, v in fgram.items():
