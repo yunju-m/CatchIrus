@@ -81,11 +81,11 @@
             </tr>
           </thead>
           <tbody class="table-group-divider">
-            {%for file in filemodel %}
+            {%for r in rankmodel %}
               <tr>
                 <th scope="row">{{forloop.counter}}</th>
-                <td>{{ file.filename }}</td>
-                <td>{{ filecount }}</td>
+                <td>{{ r.filename }}</td>
+                <td>{{ r.count }}</td>
               </tr>
               {% endfor %}
           </tbody>

@@ -7,6 +7,7 @@ from .models import FileSave, RankFile, UserFile
 from .forms import FileSaveForm, UserFileForm
 from django.core.paginator import Paginator 
 from django.utils import timezone
+from django.db.models import Count
 
 def home(request):
     # 제출버튼을 클릭하면 해당 file정보를 저장하고 /file로 매핑
@@ -60,19 +61,35 @@ def fileupload(request):
     else:
         usermodel = models.UserFile.objects.filter(author=request.user)
     
-    # file별로 정보 추출
+    # 업로드 파일과 동일한 userfile의 정보를 추출
     file_objects = models.FileSave.objects.all()
     for file_object in file_objects:
         upload_file = file_object.filename
     matchfilemodel = models.UserFile.objects.filter(filename=upload_file)
 
+    # 파일이름별 횟수 출력하여 랭크생성
+    user_files = UserFile.objects.values('filename').distinct()
+    user_files = UserFile.objects.values('filename').annotate(count=Count('filename'))
+    for file in user_files:
+        rankfile = RankFile(
+            filename=file['filename'],
+            count = file['count']
+        )
+        rankfile.save()
     page = request.GET.get('page', '1') # 페이지(1페이지부터 생성)
+    
     paginator = Paginator(usermodel, 10)    # 페이지당 10개씩
     userpage_obj = paginator.get_page(page)
+    paginator = Paginator(matchfilemodel, 10)
+    matchpage_obj = paginator.get_page(page)
+
     filemodel = models.FileSave.objects.all()   # 업로드된 파일 정보
+    rankmodel = models.RankFile.objects.all()   # 파일별 이름, 횟수 정보
     if request.method == "POST":
         # usermodel --> Json 변환
         usermodeljson = serializers.serialize('json',usermodel)
-        return JsonResponse({'usermodel': usermodeljson, 'userpage': userpage_obj.number})
+        matchfilemodeljson = serializers.serialize('json', matchfilemodel)
+        
+        return JsonResponse({'usermodel': usermodeljson, 'userpage': userpage_obj.number, 'matchmodel': matchfilemodeljson, 'matchpage': matchpage_obj.number})
     else:
-        return render(request, 'fileResult.html', {'filemodel': filemodel, 'usermodel': userpage_obj, 'matchfilemodel':matchfilemodel, 'filecount': len(matchfilemodel)})
+        return render(request, 'fileResult.html', {'filemodel': filemodel, 'usermodel': userpage_obj, 'matchfilemodel':matchfilemodel, 'rankmodel': rankmodel})

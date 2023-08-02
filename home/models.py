@@ -36,4 +36,4 @@ class RankFile(models.Model):
         db_table = 'rank_file'
 
     def __str__(self):
-        return self.filename + "-" + self.count
+        return self.filename + "-" + str(self.count)
