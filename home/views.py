@@ -57,8 +57,11 @@ def home(request):
 
         ''' 선영이 코드 시작 '''
         # 폴더 생성
-        os.mkdir("./home/user_util/temp")
-        os.mkdir("./home/user_util/result")
+        try:
+            os.mkdir("./home/user_util/temp")
+            os.mkdir("./home/user_util/result")
+        except:
+            print("파일이 존재합니다.")
 
         # opcode 추출 txt파일을 csv파일로 변환
         name = os.path.splitext(filename)[0]
