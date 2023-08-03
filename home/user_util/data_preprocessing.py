@@ -1,86 +1,74 @@
+import os
 import csv
+import pickle
 
-dic = {}
-four_gram = {}
-num = 0
+with open("op_dic.pickle", "rb") as fr:
+    dic = pickle.load(fr)
 
-class Data:  
-    def __init__(self, filepath):
-        self.filepath = filepath
+with open("4gram_dic.pickle", "rb") as ff:
+    four_gram = pickle.load(ff)
+
+class Data:
+    num = 0
+    def __init__(self, input_filepath, output_filepath):
+        self.input_filepath = input_filepath
+        self.output_filepath = output_filepath
     
-    '''
-    opcode를 dictionary로 만들기
-    ex) add, mov, mov, int -> {add, mov, mov, int ...}
-    '''
-    def make_dic(self):
-        total_data = {}
-        with open(self.filepath, "r") as inp:
+    def predict(self):
+        data = {}
+        with open(self.input_filepath, "r") as inp:
             reader = csv.reader(inp)
-            total_data = {rows[0]:rows[1:1001] for rows in reader}
-        return total_data
-    
-    '''
-    dictionary에 있는 opcode들 숫자로 변환
-    ex) {add, mov, mov, int} -> {1, 2, 2, 3}, {2, 2, 3, x}, {...}
-    '''
-    def change_num(total_data):
-        global num
-        ngram = {}
-        fname = list(total_data.keys())
-        opcode = list(total_data.values())
+            data = {rows[0]:rows[1:504] for rows in reader}
+        
+        # opcode를 4-gram으로 묶기 ex) add int mov mov mov -> (add, int, mov, mov), (int, mov, mov, mov) ...
+        op_to_4gram = {}
+        fname = list(data.keys())
+        opcode = list(data.values())
 
         for k in range(len(opcode)):
-            temp1 = []
-            for i in range(len(opcode[k]) - 3):
-                temp2 = []
+            tmp1 = []
+            for i in range(len(opcode[k])-3):
+                tmp2 = []
                 for j in range(4):
-                    if opcode[k][i + j] in dic:
-                        temp2.append(dic[opcode[k][i + j]])
+                    if opcode[k][i+j] in dic:
+                        tmp2.append(dic[opcode[k][i+j]])
                     else:
-                        dic[opcode[k][i + j]] = num
-                        temp2.append(dic[opcode[k][i + j]])
+                        dic[opcode[k][i+j]] = num
+                        tmp2.append(dic[opcode[k][i+j]])
                         num += 1
-                temp1.append(temp2)
-            ngram[fname[k]] = temp1
-        return ngram
-    
-    '''
-    숫자로 변환한 opcode를 4-gram 전처리
-    ex) {1, 2, 2, 3 ...} -> 1, 2, 3, ...
-    '''
-    def make_4gram(ngram):
-        global num
+                tmp1.append(tmp2)
+            op_to_4gram[fname[k]] = tmp1
+
+        # 4-gram으로 묶인 것들 숫자로 치환 ex) (add, int, mov, mov), (int, mov, mov, mov) -> 1, 2, ...
         num = 0
-        result = {}
-        fname = list(ngram.keys())
-        opcode = list(ngram.values())
+        fgram_to_num = {}
+        fname = list(op_to_4gram.keys())
+        opcode = list(op_to_4gram.values())
 
-        for i in range(len(opcode)):    # 500번 반복
-            temp = []
-            for j in range(len(opcode[i])): # 998번 반복
-                tmp = ""
-                for k in range(len(opcode[i][j])):  # 4번 반복
-                    tmp += str(opcode[i][j][k]) + " "
-                tmp = tmp.rstrip()
-                if tmp in four_gram:
-                    temp.append(four_gram[tmp])
+        for i in range(len(opcode)):
+            tmp1 = []
+            for j in range(len(opcode[i])):
+                tmp2 = ""
+                for k in range(len(opcode[i][j])):
+                    tmp2 += str(opcode[i][j][k]) + " "
+                tmp2 = tmp2.rstrip()
+                if tmp2 in four_gram:
+                    tmp1.append(four_gram[tmp2])
                 else:
-                    four_gram[tmp] = num
-                    temp.append(four_gram[tmp])
+                    four_gram[tmp2] = num
+                    tmp1.append(four_gram[tmp2])
                     num += 1
-            result[fname[i]] = temp
-        return result
-
-    # csv로 저장
-    def make_csv(fgram, filepath):
-        with open(filepath, 'w') as f:
+            fgram_to_num[fname[i]] = tmp1
+        
+        # csv파일로 만들기
+        with open(self.output_filepath, "w") as f:
             write = csv.writer(f)
-            print("file name", sep=',', file=f, end=',')
-            for i in range(1000):
-                print(i, sep=',', file=f, end=',')
-            print(' ', file=f)
-            for k, v in fgram.items():
-                print(k, sep=',', file=f, end=',')
+            print("file name", sep=",", file=f, end=",")
+            for i in range(500):
+                print(i, sep=",", file=f, end=",")
+            print("class", sep=",", file=f)
+            for k, v in fgram_to_num.items():
+                print(k, sep=",", file=f, end=",")
                 for d in v:
-                    print(d, sep=',', file=f, end=',')
-                print(' ', file=f)
+                    print(d, sep=",", file=f, end=",")
+                print("-1", file=f)
