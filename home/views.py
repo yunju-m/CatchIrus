@@ -56,6 +56,13 @@ def home(request):
         filesave.save()
 
         ''' 선영이 코드 시작 '''
+        # 폴더 생성
+        try:
+            os.mkdir("./home/user_util/temp")
+            os.mkdir("./home/user_util/result")
+        except:
+            print("파일이 존재합니다.")
+
         # opcode 추출 txt파일을 csv파일로 변환
         name = os.path.splitext(filename)[0]
         year = datetime.today().year
@@ -87,7 +94,7 @@ def home(request):
         data = data.drop(['file name', 'class'], axis=1)
 
         y_pred = xgb_model.predict(data).flatten()
-        y_pred = np.where(y_pred > 0.3, 1, 0)
+        y_pred = np.where(y_pred > 0.1, 1, 0)
         print(f"{name}의 예측 결과는? ", y_pred)
         ''' 선영이 코드 끝 '''
 
