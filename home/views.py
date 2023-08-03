@@ -8,6 +8,22 @@ from .forms import FileSaveForm, UserFileForm
 from django.core.paginator import Paginator 
 from django.utils import timezone
 
+# 선영이가 추가한 라이브러리
+import joblib
+from .user_util.txt_to_csv import Change
+from .user_util.data_preprocessing import Data
+import os #os.getcwd() -> 현재 디렉토리 확인
+
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import operator
+from sklearn import svm
+from sklearn import metrics
+import xgboost
+from datetime import datetime
+
 def home(request):
     # 제출버튼을 클릭하면 해당 file정보를 저장하고 /file로 매핑
     if request.method == 'POST':
@@ -38,6 +54,43 @@ def home(request):
             )
         userfile.save()
         filesave.save()
+
+        ''' 선영이 코드 시작 '''
+        # opcode 추출 txt파일을 csv파일로 변환
+        name = os.path.splitext(filename)[0]
+        year = datetime.today().year
+        month = datetime.today().month
+        day = datetime.today().day
+        
+        os.system(f"echo {name} > ./home/user_util/temp/{name}.txt")  # 파일 이름
+        if(month < 10):
+            os.system(f"objdump -d \"./media/home/files/{year}/0{month}/0{day}/{name}.exe\" | grep \"^ \" | cut -f 3 | cut -f 1 -d \" \" >> ./home/user_util/temp/{name}.txt")  # opcode
+        else:
+            os.system(f"objdump -d \"./media/home/files/{year}/{month}/{day}/{name}.exe\" | grep \"^ \" | cut -f 3 | cut -f 1 -d \" \" >> ./home/user_util/temp/{name}.txt")  # opcode
+        
+        t_to_c = Change("./home/user_util/temp/", f"{name}")
+        t_to_c.txt_to_csv()
+
+        # 4-gram 전처리하여 파일 저장
+        result = Data(f"./home/user_util/temp/{name}.csv", f"./home/user_util/result/{name}.csv")
+        result.predict()
+        
+        # 결과 파일 빼고 모두 삭제
+        for file in os.scandir("./home/user_util/temp"):
+            os.remove(file)
+
+        # 탐지된 결과 출력
+        xgb_model = joblib.load('xgb_model.pkl')
+
+        data = pd.read_csv(f'./home/user_util/result/{name}.csv')
+        data = data.dropna(axis=1)
+        data = data.drop(['file name', 'class'], axis=1)
+
+        y_pred = xgb_model.predict(data).flatten()
+        y_pred = np.where(y_pred > 0.3, 1, 0)
+        print(f"{name}의 예측 결과는? ", y_pred)
+        ''' 선영이 코드 끝 '''
+
         return redirect('file')
     # 홈페이지를 불러오면 form생성하고 home.html 화면 출력
     else:
