@@ -28,7 +28,8 @@ class UserFile(models.Model):
     
     def __str__(self):
         return self.authorname + "_" + self.filename
-    
+
+# 파일별 총 조회 개수 저장 모델    
 class RankFile(models.Model):
     filename = models.CharField(max_length=255, null=False)
     count = models.IntegerField(default=0)
@@ -38,3 +39,8 @@ class RankFile(models.Model):
 
     def __str__(self):
         return self.filename + "-" + str(self.count)
+
+class PredictProbability(models.Model):
+    proba = models.IntegerField(default=0)
+    class Meta:
+        db_table = 'predict_probability'

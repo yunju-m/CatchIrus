@@ -39,6 +39,22 @@ def home(request):
             )
         userfile.save()
         filesave.save()
+        
+        # # 파일이름별 횟수 출력하여 랭크생성
+        user_files = UserFile.objects.values('filename').distinct()
+        user_files = UserFile.objects.values('filename').annotate(count=Count('filename'))
+        
+        for file in user_files:
+            if is_filename_in_RankFile(file['filename']):
+                rankfile = RankFile.objects.get(filename=file['filename'])
+                rankfile.count = file['count']
+                rankfile.save()
+            else:
+                rankfile = RankFile(
+                    filename=file['filename'],
+                    count = file['count']
+                )
+                rankfile.save()
         return redirect('file')
     # 홈페이지를 불러오면 form생성하고 home.html 화면 출력
     else:
@@ -52,6 +68,10 @@ def home(request):
             'usersaveForm': usersaveForm,
         }
         return render(request, 'home.html', context)
+
+# RankFile에 filename이 들어있는지 판단하는 함수
+def is_filename_in_RankFile(filename):
+    return RankFile.objects.filter(filename=filename).exists() 
 
 # /file 매핑되면 file 정보를 fileResult.html에 출력    
 def fileupload(request):
@@ -67,17 +87,7 @@ def fileupload(request):
         upload_file = file_object.filename
     matchfilemodel = models.UserFile.objects.filter(filename=upload_file)
 
-    # # 파일이름별 횟수 출력하여 랭크생성
-    user_files = UserFile.objects.values('filename').distinct()
-    user_files = UserFile.objects.values('filename').annotate(count=Count('filename'))
-    for file in user_files:
-        rankfile = RankFile(
-            filename=file['filename'],
-            count = file['count']
-        )
-        rankfile.save()
     page = request.GET.get('page', '1') # 페이지(1페이지부터 생성)
-    
     paginator = Paginator(usermodel, 10)    # 페이지당 10개씩
     userpage_obj = paginator.get_page(page)
     paginator = Paginator(matchfilemodel, 10)
