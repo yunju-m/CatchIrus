@@ -40,7 +40,9 @@ class RankFile(models.Model):
     def __str__(self):
         return self.filename + "-" + str(self.count)
 
+# 모델 결과 값 저장 db
 class PredictProbability(models.Model):
     proba = models.IntegerField(default=0)
+
     class Meta:
         db_table = 'predict_probability'

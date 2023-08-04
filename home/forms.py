@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import FileSave, RankFile, UserFile
+from .models import FileSave, PredictProbability, RankFile, UserFile
 
 # 업로드 파일 form, 모델 생성
 class FileSaveForm(ModelForm):
@@ -18,3 +18,9 @@ class RankFileForm(ModelForm):
     class Meta:
         model = RankFile
         fields = ('filename', 'count')
+
+# 모델 결과 값 저장 form
+class PredictProbabilityForm(ModelForm):
+    class Meta:
+        model = PredictProbability
+        fields = ('proba',)
