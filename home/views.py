@@ -3,8 +3,8 @@ from django.core import serializers
 
 from . import models
 from django.shortcuts import redirect, render
-from .models import FileSave, UserFile
-from .forms import FileSaveForm, UserFileForm
+from .models import FileSave, UserFile, PredictProbability
+from .forms import FileSaveForm, UserFileForm, PredictProbabilityForm
 from django.core.paginator import Paginator 
 from django.utils import timezone
 
@@ -37,6 +37,7 @@ def home(request):
             file_upload = file_upload,
             filesize = filesize,
         )
+        
         # 로그인 o => 닉네임 / 로그인 x => visitor(방문객)
         if author.get_username() == '':
             UserFile.author = 'visitor'
@@ -87,15 +88,32 @@ def home(request):
             os.remove(file)
 
         # 탐지된 결과 출력
-        xgb_model = joblib.load('xgb_model.pkl')
+        rfc_model = joblib.load('rfc_model_400.pkl')
 
         data = pd.read_csv(f'./home/user_util/result/{name}.csv')
         data = data.dropna(axis=1)
         data = data.drop(['file name', 'class'], axis=1)
 
-        y_pred = xgb_model.predict(data).flatten()
-        y_pred = np.where(y_pred > 0.1, 1, 0)
-        print(f"{name}의 예측 결과는? ", y_pred)
+        y_pred = rfc_model.predict(data)
+        y_prob = rfc_model.predict_proba(data)
+        pred_result = ""
+        result = 0
+
+        if(y_pred[0] == 1.):
+            pred_result = "Benign"
+            result = float(y_prob[0][1])
+        elif(y_pred[0] == 0.):
+            pred_result = "Malware"
+            result = float(y_prob[0][0])
+
+        result = int(round(result, 2) * 100)
+
+        filesave.result = pred_result
+        probability = PredictProbability(
+            proba = result,
+        )
+        probability.save()
+        filesave.save()
         ''' 선영이 코드 끝 '''
 
         return redirect('file')
@@ -106,9 +124,11 @@ def home(request):
         models.UserFile.objects.filter(author=None).delete()
         filesaveForm = FileSaveForm
         usersaveForm = UserFileForm
+        predictprobabilityForm = PredictProbabilityForm
         context = {
             'filesaveForm': filesaveForm,
             'usersaveForm': usersaveForm,
+            'probabilityForm': predictprobabilityForm
         }
         return render(request, 'home.html', context)
 
