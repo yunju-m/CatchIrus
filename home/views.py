@@ -67,7 +67,7 @@ def fileupload(request):
         upload_file = file_object.filename
     matchfilemodel = models.UserFile.objects.filter(filename=upload_file)
 
-    # 파일이름별 횟수 출력하여 랭크생성
+    # # 파일이름별 횟수 출력하여 랭크생성
     user_files = UserFile.objects.values('filename').distinct()
     user_files = UserFile.objects.values('filename').annotate(count=Count('filename'))
     for file in user_files:
