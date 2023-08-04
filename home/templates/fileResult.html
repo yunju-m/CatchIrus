@@ -68,7 +68,9 @@
         <div class="title-container">
           <div class="content-container">
             <div class="model-content-container">
-              <p>모델 결과 내용</p>
+              {%for i in filemodel %}
+              <p>예측 결과:{{ i.result }}</p>
+              {% endfor %}
             </div>
             <div class="img-content-container">
               {%for i in filemodel %}
@@ -108,13 +110,13 @@
               </thead>
               <tbody class="table-group-divider">
                 {%for user in usermodel %}
-                  <tr>
+                <tr>
                     <th scope="row">{{forloop.counter}}</th>
                     <td>{{ user.author }}</td>
                     <td>{{ user.filename }}</td>
                     <td>{{ user.date }}</td>
                   </tr>
-                {% endfor %}
+                  {% endfor %}
               </tbody>
             </table>
             {% include "pagelist.html" %}

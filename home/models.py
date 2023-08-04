@@ -6,6 +6,7 @@ class FileSave(models.Model):
     filename = models.CharField(max_length=255, null=False)
     file_upload = models.FileField(upload_to="home/files/%Y/%m/%d/", blank=True)
     filesize = models.IntegerField(default=0)
+    result = models.CharField(max_length=20, null=False)
 
     # home_filesave 이름으로 maraidb 테이블 생성 후 저장
     # 기존 db 오류 발생 시 : 초기화 작업 필요

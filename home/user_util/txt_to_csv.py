@@ -10,8 +10,9 @@ class Change:
         f_out = open(self.filepath + self.filename + ".csv", "w")
             
         for line in f_in:
-            line_replace=line.replace("\n",",")
-            f_out.write(line_replace)
+            if line.strip():
+                line_replace = line.replace("\n", ",")
+                f_out.write(line_replace)
             
         f_in.close()
         f_out.close()

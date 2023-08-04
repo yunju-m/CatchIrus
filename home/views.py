@@ -37,6 +37,7 @@ def home(request):
             file_upload = file_upload,
             filesize = filesize,
         )
+        
         # 로그인 o => 닉네임 / 로그인 x => visitor(방문객)
         if author.get_username() == '':
             UserFile.author = 'visitor'
@@ -87,15 +88,18 @@ def home(request):
             os.remove(file)
 
         # 탐지된 결과 출력
-        xgb_model = joblib.load('xgb_model.pkl')
+        rfc_model = joblib.load('rfc_model.pkl')
 
         data = pd.read_csv(f'./home/user_util/result/{name}.csv')
         data = data.dropna(axis=1)
         data = data.drop(['file name', 'class'], axis=1)
 
-        y_pred = xgb_model.predict(data).flatten()
-        y_pred = np.where(y_pred > 0.1, 1, 0)
-        print(f"{name}의 예측 결과는? ", y_pred)
+        y_pred = rfc_model.predict(data)
+        print(y_pred)
+        print(rfc_model.predict_proba(data))
+        filesave.result = y_pred
+        filesave.save()
+        # print(f"{name}의 예측 결과는? ", y_pred)
         ''' 선영이 코드 끝 '''
 
         return redirect('file')

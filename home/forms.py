@@ -5,7 +5,7 @@ from .models import FileSave, UserFile
 class FileSaveForm(ModelForm):
     class Meta:
         model = FileSave
-        fields = ('filename', 'file_upload', 'filesize')
+        fields = ('filename', 'file_upload', 'filesize', 'result')
 
 # 사용자 별 업로드 파일 form, 모델 생성
 class UserFileForm(ModelForm):

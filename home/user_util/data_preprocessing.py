@@ -2,25 +2,27 @@ import os
 import csv
 import pickle
 
-with open("op_dic.pickle", "rb") as fr:
-    dic = pickle.load(fr)
+# with open("op_dic.pickle", "rb") as fr:
+#     dic = pickle.load(fr)
 
-with open("4gram_dic.pickle", "rb") as ff:
-    four_gram = pickle.load(ff)
+# with open("4gram_dic.pickle", "rb") as ff:
+#     four_gram = pickle.load(ff)
 
 class Data:
-    num = 0
     def __init__(self, input_filepath, output_filepath):
         self.input_filepath = input_filepath
         self.output_filepath = output_filepath
     
     def predict(self):
+        dic = {}
+        four_gram = {}
         data = {}
         with open(self.input_filepath, "r") as inp:
             reader = csv.reader(inp)
-            data = {rows[0]:rows[1:504] for rows in reader}
+            data = {rows[0]:rows[1:1004] for rows in reader}
         
         # opcode를 4-gram으로 묶기 ex) add int mov mov mov -> (add, int, mov, mov), (int, mov, mov, mov) ...
+        num = 0
         op_to_4gram = {}
         fname = list(data.keys())
         opcode = list(data.values())
@@ -64,7 +66,7 @@ class Data:
         with open(self.output_filepath, "w") as f:
             write = csv.writer(f)
             print("file name", sep=",", file=f, end=",")
-            for i in range(500):
+            for i in range(1000):
                 print(i, sep=",", file=f, end=",")
             print("class", sep=",", file=f)
             for k, v in fgram_to_num.items():
