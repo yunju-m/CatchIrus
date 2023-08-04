@@ -104,19 +104,23 @@
                 <tr>
                   <th scope="col">번호</th>
                   <th scope="col">사용자</th>
-                  <th scope="col">제목</th>
+                  <th scope="col">파일 이름</th>
+                  <th scope="col">예측 결과</th>
                   <th scope="col">작성일시</th>
                 </tr>
               </thead>
               <tbody class="table-group-divider">
                 {%for user in usermodel %}
+                {%for result in filemodel%}
                 <tr>
                     <th scope="row">{{forloop.counter}}</th>
                     <td>{{ user.author }}</td>
                     <td>{{ user.filename }}</td>
+                    <td>{{ result.result }}</td>
                     <td>{{ user.date }}</td>
-                  </tr>
-                  {% endfor %}
+                </tr>
+                {% endfor %}
+                {% endfor %}
               </tbody>
             </table>
             {% include "pagelist.html" %}
