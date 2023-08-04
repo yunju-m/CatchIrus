@@ -63,6 +63,8 @@ $ python manage.py startapp user
 
 ```bash
 $ python manage.py makemigrations
+or
+$ python manage.py makemigrations home(app이름)
 ```
 
 2. 변경사항을 데이터베이스에 적용
@@ -74,7 +76,7 @@ $ python manage.py migrate
  ### maraidb 테이블 생성 후 저장
  - 기존 db 오류 발생 시 : **초기화 작업** 필요
 ```shell
-$ python manage.py migrate --fake home(app이름) zero
+$ python manage.py migrate home(app이름) zero
 $ python manage.py migrate home(app이름)
 ```
 - mariaDB의 table 삭제 시 makemigraions, migrate을 통해 재생성⭕
@@ -151,6 +153,8 @@ $ pip install beautifulsoup4
 |2023.07.09 | 업로드 파일 저장 경로 변경 |
 |2023.07.15 | CatchIrus API 명세서 작성 - notion |
 |2023.07.20 | 파일별 업로드 회원 정보 출력 |
+|2023.08.03 | 학습시킨 model django에 연결 |
+|2023.08.04 | model 오류 수정 및 퍼센트 DB 연결 완료 |
 
 ## 화면 구성 📺
 | 로그인 페이지 | 회원가입 페이지 |
