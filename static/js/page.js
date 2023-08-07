@@ -67,8 +67,6 @@ function userDataHandler(event){
             let start = 0;          // 페이지 시작 판단 변수
             // usermodel 데이터에서 filename, date 추출
             $.each(usermodel, function(key, value){
-                console.log("key: " + key);
-                console.log(value);
                 const newRow = usertable.insertRow();
                 let cnt = 0;
                 

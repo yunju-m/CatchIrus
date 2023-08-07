@@ -1,9 +1,10 @@
+import json
 from django.http import JsonResponse
 from django.core import serializers
 
 from . import models
 from django.shortcuts import redirect, render
-from .models import FileSave, RankFile, UserFile
+from .models import FileSave, PredictProbability, RankFile, UserFile
 from .forms import FileSaveForm, UserFileForm
 from django.core.paginator import Paginator 
 from django.utils import timezone
@@ -95,7 +96,9 @@ def fileupload(request):
 
     filemodel = models.FileSave.objects.all()   # 업로드된 파일 정보
     rankmodel = models.RankFile.objects.all()   # 파일별 이름, 횟수 정보
+
     if request.method == "POST":
+        print("나 동작해볼게!!!!------------------------")
         # usermodel --> Json 변환
         usermodeljson = serializers.serialize('json',usermodel)
         matchfilemodeljson = serializers.serialize('json', matchfilemodel)
@@ -103,3 +106,12 @@ def fileupload(request):
         return JsonResponse({'usermodel': usermodeljson, 'userpage': userpage_obj.number, 'matchmodel': matchfilemodeljson, 'matchpage': matchpage_obj.number})
     else:
         return render(request, 'fileResult.html', {'filemodel': filemodel, 'usermodel': userpage_obj, 'matchfilemodel':matchfilemodel, 'rankmodel': rankmodel})
+    
+# 모델 결과 값 chart text에 출력하는 함수
+def filechart(request):
+    predictresultmodel = models.PredictProbability.objects.all()    #모델 결과 정보
+    predictresultmodel_json = serializers.serialize('json', predictresultmodel)                      
+    predictresultmodel_list = json.loads(predictresultmodel_json)
+    proba_values = [item["fields"]["proba"] for item in predictresultmodel_list]
+    
+    return JsonResponse({'proba_values':proba_values})
