@@ -6,15 +6,20 @@ crateChart();
 
 // chart 생성
 async function crateChart() {
-  const text = await fetchDataFromModel();
-  
+  const predict_model = await fetchDataFromModel();
+  const text = predict_model.proba
+  const result = predict_model.result
+  let backgroundColor;
+  if (result == "Benign") {
+    backgroundColor = ['#9DCEFF', '#F2F3F6'];
+  } else if (result == "Malware") {
+    backgroundColor = ['#FF0000', '#F2F3F6'];
+  }
+
   const data = {
     datasets: [{
       data: [100, 0],
-      backgroundColor: [
-        '#9DCEFF',
-        '#F2F3F6'
-      ],
+      backgroundColor: backgroundColor,
       scaleBeginAtZero: true,
       borderWidth:0,
       hoverOffset: 2,
@@ -56,7 +61,7 @@ async function fetchDataFromModel() {
       const response = await fetch(apiUrl);
       if (response.ok){
         const data = await response.json();
-        return data.proba_values;
+        return data;
       } else{
         console.error('Error fetching chart data:', response.status);
       }

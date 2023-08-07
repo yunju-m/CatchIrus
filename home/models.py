@@ -6,7 +6,6 @@ class FileSave(models.Model):
     filename = models.CharField(max_length=255, null=False)
     file_upload = models.FileField(upload_to="home/files/%Y/%m/%d/", blank=True)
     filesize = models.IntegerField(default=0)
-    result = models.CharField(max_length=255, null=False)
 
     # home_filesave 이름으로 maraidb 테이블 생성 후 저장
     class Meta:
@@ -43,6 +42,7 @@ class RankFile(models.Model):
 # 모델 결과 값 저장 db
 class PredictProbability(models.Model):
     proba = models.IntegerField(default=0)
+    result = models.CharField(max_length=255, null=False, default="")
 
     class Meta:
         db_table = 'predict_probability'

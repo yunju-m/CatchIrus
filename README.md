@@ -170,15 +170,17 @@ $ pip install beautifulsoup4
 |2023.07.15 | CatchIrus API 명세서 작성 - notion |
 |2023.07.20 | 파일별 업로드 회원 정보 출력 |
 |2023.08.04 | 전체 파일 조회 횟수 출력하는 랭킹 테이블 생성 |
-|2023.08.07 | 모델 결과 chart 출력 | 
+|2023.08.07 | 모델 결과 chart text에 출력 | 
+|2023.08.07 | 모델 결과에 따른 chart 색상 변경 |
 
 ## 화면 구성 📺
 | 로그인 페이지 | 회원가입 페이지 |
-| ------------ | ---------------- |
+| :------------: | :----------------: |
+<img alt="loginpage" src="/static/img/로그인 페이지.png"> | <img alt="dataApi" src="/static/img/회원가입 페이지.png">
 
 | 메인 페이지 | 검사결과 페이지 |
-| ------------ | ---------------- |
-
+| :------------: | :----------------: |
+<img alt="dataApi" src="/static/img/메인페이지.png"> | <img alt="dataApi" src="/static/img/임시결과페이지.png">
 ## Data API Document 
 <div align="center">
 <img alt="dataApi" src="/static/img/DataApi.png">

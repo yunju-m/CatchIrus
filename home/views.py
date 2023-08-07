@@ -112,6 +112,6 @@ def filechart(request):
     predictresultmodel = models.PredictProbability.objects.all()    #모델 결과 정보
     predictresultmodel_json = serializers.serialize('json', predictresultmodel)                      
     predictresultmodel_list = json.loads(predictresultmodel_json)
-    proba_values = [item["fields"]["proba"] for item in predictresultmodel_list]
-    
-    return JsonResponse({'proba_values':proba_values})
+    proba = [item["fields"]["proba"] for item in predictresultmodel_list]
+    result = [item["fields"]["result"] for item in predictresultmodel_list]
+    return JsonResponse({'proba':proba, 'result': result})
