@@ -25,10 +25,33 @@ class UserFile(models.Model):
     authorname = models.CharField(max_length=20, null=False)
     filename = models.CharField(max_length=255, null=False)
     date = models.DateTimeField()
+    
     class Meta:
         db_table = 'user_file'
+    
+    def __str__(self):
+        return self.authorname + "_" + self.filename
 
 class PredictProbability(models.Model):
     proba = models.IntegerField(default=0)
+    class Meta:
+        db_table = 'predict_probability'
+        
+# 파일별 총 조회 개수 저장 모델    
+class RankFile(models.Model):
+    filename = models.CharField(max_length=255, null=False)
+    count = models.IntegerField(default=0)
+
+    class Meta:
+        db_table = 'rank_file'
+
+    def __str__(self):
+        return self.filename + "-" + str(self.count)
+
+# 모델 결과 값 저장 db
+class PredictProbability(models.Model):
+    proba = models.IntegerField(default=0)
+    result = models.CharField(max_length=255, null=False, default="")
+
     class Meta:
         db_table = 'predict_probability'
