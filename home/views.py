@@ -4,7 +4,7 @@ from django.core import serializers
 
 from . import models
 from django.shortcuts import redirect, render
-from .models import FileSave, PredictProbability, RankFile, UserFile
+from .models import FileSave, RankFile, UserFile
 from .forms import FileSaveForm, UserFileForm
 from django.core.paginator import Paginator 
 from django.utils import timezone
@@ -34,26 +34,28 @@ def home(request):
         else:
             userfile = UserFile(
                 author = author,
-                authorname = author,
+                authorname = author.get_username(),
                 filename = filename,
                 date = date,
             )
+
         userfile.save()
         filesave.save()
-        
+
         # # 파일이름별 횟수 출력하여 랭크생성
         user_files = UserFile.objects.values('filename').annotate(count=Count('filename'))
         for file in user_files:
-            if is_filename_in_RankFile(file['filename']):
-                rankfile = RankFile.objects.get(filename=file['filename'])
-                rankfile.count += 1
-                rankfile.save()
-            else:
-                rankfile = RankFile(
-                    filename=file['filename'],
-                    count = file['count']
-                )
-                rankfile.save()
+            if file['filename'] == filename:
+                if is_filename_in_RankFile(file['filename']):
+                    rankfile = RankFile.objects.get(filename=file['filename'])
+                    rankfile.count += 1
+                    rankfile.save()
+                else:
+                    rankfile = RankFile(
+                        filename=file['filename'],
+                        count = file['count']
+                    )
+                    rankfile.save()
         return redirect('file')
     # 홈페이지를 불러오면 form생성하고 home.html 화면 출력
     else:
@@ -84,7 +86,7 @@ def fileupload(request):
     file_objects = models.FileSave.objects.all()
     for file_object in file_objects:
         upload_file = file_object.filename
-    matchfilemodel = models.UserFile.objects.filter(filename=upload_file)
+    matchfilemodel = models.UserFile.objects.filter(filename=upload_file).order_by('-date')
 
     page = request.GET.get('page', '1') # 페이지(1페이지부터 생성)
     paginator = Paginator(usermodel, 10)    # 페이지당 10개씩
@@ -93,10 +95,9 @@ def fileupload(request):
     matchpage_obj = paginator.get_page(page)
 
     filemodel = models.FileSave.objects.all()   # 업로드된 파일 정보
-    rankmodel = models.RankFile.objects.all()   # 파일별 이름, 횟수 정보
+    rankmodel = models.RankFile.objects.all().order_by('-count')   # 파일별 이름, 횟수 정보 (조회수 많은 순서부터 출력)
 
     if request.method == "POST":
-        print("나 동작해볼게!!!!------------------------")
         # usermodel --> Json 변환
         usermodeljson = serializers.serialize('json',usermodel)
         matchfilemodeljson = serializers.serialize('json', matchfilemodel)
