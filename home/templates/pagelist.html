@@ -3,9 +3,7 @@
   <!-- 이전페이지 -->
   {% if usermodel.has_previous %}
   <li class="page-item">
-    <a class="page-link" href="?page={{ usermodel.previous_page_number }}"
-      >이전</a
-    >
+    <a class="page-link" href="?page={{ usermodel.previous_page_number }}">이전</a>
   </li>
   {% else %}
   <li class="page-item disabled">
@@ -17,7 +15,7 @@
   <!--해당 페이지이면-->
   {% if userpage == usermodel.number %}
   <li class="page-item active" aria-current="page">
-    <a class="page-link" href="?page={{  userpage }}">{{ userpage }}</a>
+    <a class="page-link" href="?page={{ userpage }}">{{ userpage }}</a>
   </li>
   {% else %}
   <li class="page-item">
