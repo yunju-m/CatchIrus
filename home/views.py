@@ -42,13 +42,11 @@ def home(request):
         filesave.save()
         
         # # 파일이름별 횟수 출력하여 랭크생성
-        user_files = UserFile.objects.values('filename').distinct()
         user_files = UserFile.objects.values('filename').annotate(count=Count('filename'))
-        
         for file in user_files:
             if is_filename_in_RankFile(file['filename']):
                 rankfile = RankFile.objects.get(filename=file['filename'])
-                rankfile.count = file['count']
+                rankfile.count += 1
                 rankfile.save()
             else:
                 rankfile = RankFile(

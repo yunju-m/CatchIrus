@@ -23,4 +23,4 @@ class RankFileForm(ModelForm):
 class PredictProbabilityForm(ModelForm):
     class Meta:
         model = PredictProbability
-        fields = ('proba',)
+        fields = ('proba', 'result')
