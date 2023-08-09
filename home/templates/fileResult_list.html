@@ -1,12 +1,7 @@
 <div class="container my-3">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
-          Home
-        </button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history-tab-pane" type="button" role="tab" aria-controls="history-tab-pane" aria-selected="false">
+        <button class="nav-link active" id="history-tab" data-bs-toggle="tab" data-bs-target="#history-tab-pane" type="button" role="tab" aria-controls="history-tab-pane" aria-selected="true">
           History
         </button>
       </li>
@@ -22,10 +17,7 @@
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-        <p>home 내용</p>
-      </div>
-      <div class="tab-pane fade" id="history-tab-pane" role="tabpanel" aria-labelledby="history-tab" tabindex="1">
+      <div class="tab-pane fade show active" id="history-tab-pane" role="tabpanel" aria-labelledby="history-tab" tabindex="0">
         <table id="usertable" class="table table-hover">
           <thead class="table-dark">
             <tr>
@@ -39,7 +31,7 @@
             {%for user in usermodel %}
               <tr>
                 <th scope="row">{{forloop.counter}}</th>
-                <td>{{ user.author }}</td>
+                <td>{{ user.authorname }}</td>
                 <td>{{ user.filename }}</td>
                 <td>{{ user.date }}</td>
               </tr>
@@ -62,7 +54,7 @@
             {%for matchfile in matchfilemodel %}
               <tr>
                 <th scope="row">{{forloop.counter}}</th>
-                <td>{{ matchfile.author }}</td>
+                <td>{{ matchfile.authorname }}</td>
                 <td>{{ matchfile.filename }}</td>
                 <td>{{ matchfile.date }}</td>
               </tr>
@@ -71,7 +63,7 @@
         </table>
         {% include "pagelist.html" %}
       </div>
-      <div class="tab-pane fade" id="filerank-tab-pane" role="tabpanel" aria-labelledby="filerank-tab" tabindex="1">
+      <div class="tab-pane fade" id="filerank-tab-pane" role="tabpanel" aria-labelledby="filerank-tab" tabindex="2">
         <table id="usertable" class="table table-hover">
           <thead class="table-dark">
             <tr>

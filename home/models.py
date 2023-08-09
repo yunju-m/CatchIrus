@@ -17,7 +17,7 @@ class FileSave(models.Model):
 
 # 사용자 별 파일 업로드 저장 모델
 class UserFile(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)   # auth-user 기본키
     authorname = models.CharField(max_length=20, null=False)
     filename = models.CharField(max_length=255, null=False)
     date = models.DateTimeField()
