@@ -36,6 +36,9 @@ $ cd .
 
 ```
 $ python -m venv venv
+$ pip install --upgrade pip
+$ pip install django
+$ pip install mysqlclient
 $ venv\Scripts\activate.bat
 ```
 
@@ -169,4 +172,4 @@ $ pip install beautifulsoup4
 | :-------------: | :--------------: | :---------------: |
 
 ## Data API Document 
-![DataApi](https://github.com/yunju-m/CatchIrus/assets/74498379/88943739-9a93-4b17-a3e4-787817d91048)
+![Catchirus_DataApi](https://github.com/yunju-m/CatchIrus/assets/74498379/d3bbe99c-6f4a-4715-89a3-b89167ac3e64)
