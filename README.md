@@ -36,6 +36,9 @@ $ cd .
 
 ```shell
 $ python -m venv venv
+$ python install --upgrade pip
+$ pip install django
+$ pip install mysqlclient
 $ venv\Scripts\activate.bat
 ```
 
@@ -172,16 +175,12 @@ $ pip install beautifulsoup4
 |2023.08.04 | 전체 파일 조회수 랭킹 테이블 생성 |
 |2023.08.07 | 모델 결과 chart text에 출력 | 
 |2023.08.07 | 모델 결과에 따른 chart 색상 변경 |
-|2023.08.08 | 로그아웃 사용자 파일 조회수 문제 해결 |
+|2023.08.08-09 | 로그아웃 사용자 파일 조회수 문제 해결 및 보완 |
 
 ## 화면 구성 📺
-| 로그인 페이지 | 회원가입 페이지 |
-| :------------: | :----------------: |
-<img alt="loginpage" src="/static/img/로그인 페이지.png"> | <img alt="dataApi" src="/static/img/회원가입 페이지.png">
-
-| 메인 페이지 | 검사결과 페이지 |
-| :------------: | :----------------: |
-<img alt="dataApi" src="/static/img/메인페이지.png"> | <img alt="dataApi" src="/static/img/임시결과페이지.png">
+| 메인 페이지 | 로그인 페이지 | 회원가입 페이지 |
+| :------------: | :----------------: | :----------------: |
+<img alt="dataApi" src="/static/img/메인페이지.png"> | <img alt="loginpage" src="/static/img/로그인 페이지.png"> | <img alt="dataApi" src="/static/img/회원가입 페이지.png"> | 
 
 ## Data API Document 
 <div align="center">

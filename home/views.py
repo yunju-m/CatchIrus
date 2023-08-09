@@ -43,19 +43,16 @@ def home(request):
         filesave.save()
 
         # # 파일이름별 횟수 출력하여 랭크생성
-        user_files = UserFile.objects.values('filename').annotate(count=Count('filename'))
-        for file in user_files:
-            if file['filename'] == filename:
-                if is_filename_in_RankFile(file['filename']):
-                    rankfile = RankFile.objects.get(filename=file['filename'])
-                    rankfile.count += 1
-                    rankfile.save()
-                else:
-                    rankfile = RankFile(
-                        filename=file['filename'],
-                        count = file['count']
-                    )
-                    rankfile.save()
+        if is_filename_in_RankFile(filesave.filename):
+            rankfile = RankFile.objects.get(filename=filesave.filename)
+            rankfile.count += 1
+        else:
+            rankfile = RankFile(
+                filename=filesave.filename,
+                count = 1
+            )
+        rankfile.save()
+        
         return redirect('file')
     # 홈페이지를 불러오면 form생성하고 home.html 화면 출력
     else:
