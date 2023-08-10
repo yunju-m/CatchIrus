@@ -38,11 +38,6 @@ submitBtn.addEventListener("mouseleave", handleBtnLeave);
 fileInput.addEventListener("input", handleFileUp);
 
 /* 2. 모달(드래그) 통해 파일 업로드하는 경우 */
-//파일 넣는 부분에 이벤트가 발생했을 때 
-fileInput.onchange = function (e) {
-    modal.classList.toggle('show');//모달창을 띄운다.
-}
-
 //body에 드래그하고 있을 때
 body.addEventListener('dragover', function (e) {
     e.preventDefault();
