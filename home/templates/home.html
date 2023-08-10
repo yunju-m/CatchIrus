@@ -52,22 +52,8 @@
               <input class="fileBtn" type="hidden" id="submitBtn" value="Submit"/>
             </div>
           </form>
-          <!--모달창 띄우기-->
-          <div class="modal">
-            <div class="modal_body">
-              <div class="modal-container">
-                <i class="bi-file-earmark-arrow-up" style="font-size: 7rem; color: cornflowerblue" ></i>
-              </div>
-              <div class = "modal_file">
-                <label for="input-file" class="fileBtn" id="fileBtn" data-bs-toggle="tooltip" data-bs-placement="top" title="Max size 650MB">Upload File</label>
-              </div>
-            <div class = "modal_warning">
-              위의 데이터를 제출함으로써 귀하는 당사의 서비스 약관 및 개인정보 보호정책과 귀하의 샘플 제출을 보안 커뮤니티와 공유하는 데 동의하는 것입니다. 개인 정보를 제출하지 마십시오. CatchiRus는 귀하가 제출한 내용에 대해 책임을 지지 않습니다.
-            </div>         
-            </div>
-          </div>
-          <!--모달창 띄우기 끝-->
         </div>
+        {% include "modal.html" %}
         <div class="filecontent-container">
           <p>
             악성코드는 개인정보 유출, 랜섬웨어 등의 공격으로 실질적인 피해를
