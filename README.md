@@ -173,6 +173,7 @@ $ pip install beautifulsoup4
 
 | 검사결과 페이지(History) | 검사결과 페이지(Community) | 검사결과 페이지(Rank) | 
 | :-------------: | :--------------: | :---------------: |
+| ![결과 페이지(History)](https://github.com/yunju-m/CatchIrus/assets/85944233/fdea3d01-7e4f-4819-9eaf-d6a8aa838bda) | ![결과 페이지(Community)](https://github.com/yunju-m/CatchIrus/assets/85944233/250e2063-04b7-432b-9c3d-fcc15246c8ae) | ![결과 페이지(Rank)](https://github.com/yunju-m/CatchIrus/assets/85944233/7761bfe2-c6ae-43ac-88a7-1ee5b829f8e0) |
 
 ## Data API Document 
 ![Catchirus_DataApi](https://github.com/yunju-m/CatchIrus/assets/74498379/d3bbe99c-6f4a-4715-89a3-b89167ac3e64)
