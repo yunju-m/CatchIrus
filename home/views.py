@@ -89,7 +89,7 @@ def home(request):
         
         os.system(f"echo {name} > ./home/user_util/temp/{name}.txt")  # 파일 이름
         if(month < 10):
-            os.system(f"objdump -d \"./media/home/files/{year}/0{month}/0{day}/{name}.exe\" | grep \"^ \" | cut -f 3 | cut -f 1 -d \" \" >> ./home/user_util/temp/{name}.txt")  # opcode
+            os.system(f"objdump -d \"./media/home/files/{year}/0{month}/{day}/{name}.exe\" | grep \"^ \" | cut -f 3 | cut -f 1 -d \" \" >> ./home/user_util/temp/{name}.txt")  # opcode
         else:
             os.system(f"objdump -d \"./media/home/files/{year}/{month}/{day}/{name}.exe\" | grep \"^ \" | cut -f 3 | cut -f 1 -d \" \" >> ./home/user_util/temp/{name}.txt")  # opcode
         
