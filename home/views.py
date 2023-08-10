@@ -98,6 +98,7 @@ def fileupload(request):
 
     filemodel = models.FileSave.objects.all()   # 업로드된 파일 정보
     rankmodel = models.RankFile.objects.all().order_by('-count')   # 파일별 이름, 횟수 정보 (조회수 많은 순서부터 출력)
+    probamodel = models.PredictProbability.objects.all()    # 모델 예측 결과 정보
 
     if request.method == "POST":
         # usermodel --> Json 변환
@@ -106,7 +107,7 @@ def fileupload(request):
         
         return JsonResponse({'usermodel': usermodeljson, 'userpage': userpage_obj.number, 'matchmodel': matchfilemodeljson, 'matchpage': matchpage_obj.number})
     else:
-        return render(request, 'fileResult.html', {'filemodel': filemodel, 'usermodel': userpage_obj, 'matchfilemodel':matchfilemodel, 'rankmodel': rankmodel})
+        return render(request, 'fileResult.html', {'filemodel': filemodel, 'usermodel': userpage_obj, 'matchfilemodel':matchfilemodel, 'rankmodel': rankmodel, 'probamodel':probamodel})
     
 # 모델 결과 값 chart text에 출력하는 함수
 def filechart(request):

@@ -70,7 +70,13 @@
         <div class="title-container">
           <div class="content-container">
             <div class="model-content-container">
-              <p>모델 결과 내용</p>
+              {%for p in probamodel%}
+                {% if p.result == "Benign" %}
+                  <p>모델 결과 내용: 정상</p>
+                {% else %}
+                  <p>모델 결과 내용: 악성</p>
+                {% endif %}
+              {% endfor %}
             </div>
             <div class="img-content-container">
               {%for i in filemodel %}
