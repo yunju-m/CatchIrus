@@ -25,16 +25,24 @@
             <th scope="col">사용자</th>
             <th scope="col">제목</th>
             <th scope="col">작성일시</th>
+            <th scop="col">예측결과</th>
           </tr>
         </thead>
         <tbody class="table-group-divider">
           {%for user in usermodel %}
+          {%for p in probamodel%}
             <tr>
               <th scope="row">{{forloop.counter}}</th>
               <td>{{ user.authorname }}</td>
               <td>{{ user.filename }}</td>
               <td>{{ user.date }}</td>
+              <td>{% if p.result == "Benign" %}
+                <p>정상</p>
+              {% else %}
+                <p>악성</p>
+              {% endif %}</td>
             </tr>
+            {% endfor %}
           {% endfor %}
         </tbody>
       </table>
@@ -47,8 +55,8 @@
             <th scope="col">번호</th>
             <th scope="col">사용자</th>
             <th scope="col">파일이름</th>
-            <th scop="col">예측 결과</th>
             <th scope="col">업로드일시</th>
+            <th scop="col">예측결과</th>
           </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -58,7 +66,11 @@
               <th scope="row">{{forloop.counter}}</th>
               <td>{{ matchfile.authorname }}</td>
               <td>{{ matchfile.filename }}</td>
-              <td>{{ p.result }}</td>
+              <td>{% if p.result == "Benign" %}
+                <p>정상</p>
+              {% else %}
+                <p>악성</p>
+              {% endif %}</td>
               <td>{{ matchfile.date }}</td>
             </tr>
           {% endfor %}
