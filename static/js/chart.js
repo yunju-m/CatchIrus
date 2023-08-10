@@ -7,18 +7,19 @@ crateChart();
 // chart 생성
 async function crateChart() {
   const predict_model = await fetchDataFromModel();
-  const text = predict_model.proba
-  const result = predict_model.result
+  const proba = predict_model.proba;
+  const text = proba + "%";
+  const result = predict_model.result;
   let backgroundColor;
   if (result == "Benign") {
-    backgroundColor = ['#9DCEFF', '#F2F3F6'];
+    backgroundColor = ['#00ff00', '#FF0000'];
   } else if (result == "Malware") {
-    backgroundColor = ['#FF0000', '#F2F3F6'];
+    backgroundColor = ['#FF0000', '#00ff00'];
   }
 
   const data = {
     datasets: [{
-      data: [100, 0],
+      data: [proba, 100-proba],
       backgroundColor: backgroundColor,
       scaleBeginAtZero: true,
       borderWidth:0,
