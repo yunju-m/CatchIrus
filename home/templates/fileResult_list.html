@@ -58,7 +58,11 @@
               <th scope="row">{{forloop.counter}}</th>
               <td>{{ matchfile.authorname }}</td>
               <td>{{ matchfile.filename }}</td>
-              <td>{{ p.result }}</td>
+              <td>{% if p.result == "Benign" %}
+                <p>정상</p>
+              {% else %}
+                <p>악성</p>
+              {% endif %}</td>
               <td>{{ matchfile.date }}</td>
             </tr>
           {% endfor %}
